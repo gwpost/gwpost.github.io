@@ -69,5 +69,5 @@ theme: landscape
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/gwpost/gwpost.github.io.git
-  branch: master  
+  repository: git@github.com:gwpost/blog.git
+  branch: gh-pages  
