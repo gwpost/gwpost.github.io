@@ -6,7 +6,7 @@
 title: 时间就像海绵里的水
 subtitle: 顾闻的博客
 description: guwen,blog,hust,hubei,wuhan
-author: guwen
+author: 顾闻
 language: 
 timezone:
 
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: tranquilpeak
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
