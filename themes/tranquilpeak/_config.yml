@@ -28,35 +28,35 @@ image_dir: assets/images
 sidebar:
     menu:
         home:
-            title: 主页
+            title: Home
             url: /
             icon: home
-        # categories:
-        #     title: global.categories
-        #     url: /all-categories
-        #     icon: bookmark
+        categories:
+            title: Categories
+            url: /all-categories
+            icon: bookmark
         tags:
-            title: global.tags
+            title: Tags
             url: /all-tags
             icon: tags
-        # archives:
-        #     title: global.archives
-        #     url: /all-archives
-        #     icon: archive
-        # search:
-        #     title: global.search
-        #     url: /#search
-        #     icon: search
-        #     # `st-search-show-outputs` classes are used to open swiftype search window
-        #     class: st-search-show-outputs
+        archives:
+            title: Archives
+            url: /all-archives
+            icon: archive
+        #search:
+            #title: Search
+            #url: /#search
+            #icon: search
+            # `st-search-show-outputs` classes are used to open swiftype search window
+            #class: t-search-show-outputs
         about:
-            title: 关于我
+            title: About me
             url: /#about
             icon: question
     author_links:
         github:
             title: global.github
-            url: https://github.com/yunlzheng
+            url: https://github.com/gwpost
             icon: github
         # stack_overflow:
         #     title: global.stack_overflow
@@ -103,10 +103,10 @@ header:
 # Author
 # Your biography and your job is editable in each languages files in `languages` folder
 author:
-    email: yunl.zheng@gmail.com
-    location: chengdu
-    job: Thoughtworks
-    bio: A web(app) developer
+    email: gwpost@qq.com
+    location: wuhan
+    job: HUST
+    bio: A web developer
     # Your profile picture located in folder `source/_images/` (development)
     # or in `source/assets/images/` (production).
     # Overwritten by your gravatar image if `gravatar_image` is enabled
@@ -128,7 +128,7 @@ sidebar_behavior: 3
 # Hide sidebar on all article page to let article take full width to improve reading, and enjoy wide images and cover images. (true: enable, false: disable)
 clear_reading: true
 # Head title displayed at the top of the table of contents.
-toc_title: Table of contents
+toc_title: 目 录
 # Display thumbnail image of each post on index pages (false: disabled, true: enabled)
 thumbnail_image: true
 # Message displayed after the <!-- more --> comment
@@ -142,7 +142,7 @@ go_to_message: Go to the website
 # Otherwise put your image in folder `source/_images/` (development)  or in `source/assets/images/` if you can't or don't want to build the theme,
 # and use relative url : `/assets/images/your-image.png`
 # cover_image: http://res.cloudinary.com/tranquilpeak-hexo-theme/image/upload/v1438975482/v1.3.0-cover.jpg
-cover_image: http://7pn5d3.com1.z0.glb.clouddn.com/backgroundv1.3.0-cover.jpg
+#cover_image: http://7pn5d3.com1.z0.glb.clouddn.com/backgroundv1.3.0-cover.jpg
 # Your favicon located in folder `source/_images/` (development) or in `source/assets/images/` (production)
 favicon:
 # Display an image gallery at the end of a post which have photos variables (false: disabled, true: enabled)
@@ -155,17 +155,17 @@ tag_pagination: true
 
 # Integrated services
 # Your Disqus shortname
-disqus_shortname: ylnotes
+#disqus_shortname: ylnotes
 # Your Google analystics web property ID : UA-XXXXX-X
-google_analytics_id: UA-37439567-4
+#google_analytics_id: UA-37439567-4
 # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
 gravatar_email: yunl.zheng@gmail.com
 # Your swiftype install key
-swiftype_install_key:
+#swiftype_install_key:
 # Your Facebook user ids used to connect your blog with your facebook user accounts (Facebook Insights). Separate ids with comma. e.g : 9830047,1003342
-fb_admin_ids:
+#fb_admin_ids:
 # Your Facebook app id used to connect your blog with your facebook app account (Facebook Insights). E.g : 9841307
-fb_app_id:
+#fb_app_id:
 
 # Enable RSS feed
 feed:
