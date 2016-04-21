@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Guwen&#39;s Studio">
+    <title>技术文章,每天读一点 - Guwen&#39;s Studio</title>
+    <meta name="author" content="Gu Wen">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Java
+Java应用一般架构
+
+Linux
+为什么说systemd是系统管理员的利器
+Linux运维比较实用的工具
+
+Python
+亲测，手把手教你用Python抢票
+12306的变态验证码算什么？我有Python神器
+7 款 Python 可视化工具对比
+Python 程序员都会喜欢的 6 个库
+告诉你，为什么开发、运维和数据都需要用Python！
+
+大数据
+大数据分析方法解读以及相关工具介绍">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="技术文章,每天读一点">
+<meta property="og:url" content="http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/index.html">
+<meta property="og:site_name" content="Guwen's Studio">
+<meta property="og:description" content="Java
+Java应用一般架构
+
+Linux
+为什么说systemd是系统管理员的利器
+Linux运维比较实用的工具
+
+Python
+亲测，手把手教你用Python抢票
+12306的变态验证码算什么？我有Python神器
+7 款 Python 可视化工具对比
+Python 程序员都会喜欢的 6 个库
+告诉你，为什么开发、运维和数据都需要用Python！
+
+大数据
+大数据分析方法解读以及相关工具介绍">
+<meta property="og:updated_time" content="2015-12-18T14:37:27.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="技术文章,每天读一点">
+<meta name="twitter:description" content="Java
+Java应用一般架构
+
+Linux
+为什么说systemd是系统管理员的利器
+Linux运维比较实用的工具
+
+Python
+亲测，手把手教你用Python抢票
+12306的变态验证码算什么？我有Python神器
+7 款 Python 可视化工具对比
+Python 程序员都会喜欢的 6 个库
+告诉你，为什么开发、运维和数据都需要用Python！
+
+大数据
+大数据分析方法解读以及相关工具介绍">
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Guwen&#39;s Studio</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Gu Wen</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-male"></i>
+                    <span class="sidebar-button-desc">About Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/gwpost" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:gwpost@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            技术文章,每天读一点
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Dec 18 2015 20:57:35 GMT+0800">
+	
+		    Dec 18, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/links/">links</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h1 id="Java">Java</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BKpdfHL&amp;up=" target="_blank" rel="external">Java应用一般架构</a></li>
+</ul>
+<h1 id="Linux">Linux</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSA3uw4&amp;up=" target="_blank" rel="external">为什么说systemd是系统管理员的利器</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BS4R6tN&amp;up=" target="_blank" rel="external">Linux运维比较实用的工具</a></li>
+</ul>
+<h1 id="Python">Python</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bc1kOa6&amp;up=1" target="_blank" rel="external">亲测，手把手教你用Python抢票</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bcaz4Wg&amp;up=313" target="_blank" rel="external">12306的变态验证码算什么？我有Python神器</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVUao6L&amp;up=" target="_blank" rel="external">7 款 Python 可视化工具对比</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVMUhV8&amp;up=" target="_blank" rel="external">Python 程序员都会喜欢的 6 个库</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTOYAi7&amp;up=" target="_blank" rel="external">告诉你，为什么开发、运维和数据都需要用Python！</a></li>
+</ul>
+<h1 id="大数据">大数据</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BeQTyER&amp;up=166" target="_blank" rel="external">大数据分析方法解读以及相关工具介绍</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfKT3RW&amp;up=188" target="_blank" rel="external">2分钟读懂大数据框架Hadoop和Spark的异同</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BbrgbhX&amp;up=200" target="_blank" rel="external">百度资深专家：我在大数据项目中踩过的那些坑</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BYB5bcu&amp;up=392" target="_blank" rel="external">带您了解大数据</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BK03pY8&amp;up=313" target="_blank" rel="external">数据科学 怎样进行大数据的入门级学习？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AgT4SZD&amp;up=" target="_blank" rel="external">三种数据部门架构优与劣</a></li>
+</ul>
+<h1 id="数据可视化">数据可视化</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BZIv9nk&amp;up=245" target="_blank" rel="external">数据可视化、信息可视化、知识可视化</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bg2v0sH&amp;up=200" target="_blank" rel="external">14款基于javascript的数据可视化工具</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRr2NDS&amp;up=" target="_blank" rel="external">大数据有哪些炫酷可视化应用？</a></li>
+</ul>
+<h1 id="机器学习">机器学习</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bi3GW7G&amp;up=1113" target="_blank" rel="external">数据科学中最好的5个机器学习API</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BbDX2hW&amp;up=392" target="_blank" rel="external">机器学习初识</a></li>
+</ul>
+<h1 id="数据挖掘">数据挖掘</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AuVqVkf&amp;up=undefined" target="_blank" rel="external">互联网和金融，在数据挖掘上究竟存在什么区别</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AtTLPCv&amp;up=" target="_blank" rel="external">数据科学家知识体系与数据分析完整流程</a></li>
+</ul>
+<h1 id="爬虫">爬虫</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BgKrb6I&amp;up=561" target="_blank" rel="external">雅虎开源解析 HTML 页面数据的 Web 爬取工具 Anthelion</a></li>
+</ul>
+<h1 id="Docker">Docker</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfnnTpw&amp;up=437" target="_blank" rel="external">Docker脑洞大开的奇思妙用</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTfnoQz&amp;up=" target="_blank" rel="external">用浏览器管理 Docker</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSEroZN&amp;up=" target="_blank" rel="external">Docker容器 vs 全虚拟化</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BQMpc3B&amp;up=" target="_blank" rel="external">如何使用docker精简开发过程?</a></li>
+</ul>
+<h1 id="运维">运维</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BhK9lb8&amp;up=471" target="_blank" rel="external">运维排查问题的方法和脚本</a></li>
+</ul>
+<h1 id="AngularJs">AngularJs</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSbQPQS&amp;up=" target="_blank" rel="external">10 个非常有用的 AngularJS 框架</a></li>
+</ul>
+<h1 id="前端">前端</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BZYZaLs&amp;up=313" target="_blank" rel="external">29个前端工程师和设计师必备的Chrome插件</a></li>
+</ul>
+<h1 id="树莓派">树莓派</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BU6smrN&amp;up=" target="_blank" rel="external">树莓派初学者？先做做这十个项目吧</a></li>
+</ul>
+<h1 id="Arduino">Arduino</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BhbEX37&amp;up=188" target="_blank" rel="external">控制Arduino的利器-Windows Remote Arduino</a></li>
+</ul>
+<h1 id="程序员提高">程序员提高</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfkfiqM&amp;up=2381" target="_blank" rel="external">26岁程序员的出路</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BeBX8zt&amp;up=414" target="_blank" rel="external">如何利用碎片时间，和别人拉开距离</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BenLIIw&amp;up=4" target="_blank" rel="external">菜鸟程序员如何才能快速提高自己的技术</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BFMe5nz&amp;up=256" target="_blank" rel="external">可以使你成为更优秀程序员的5个好习惯</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Banmzzo&amp;up=787" target="_blank" rel="external">论程序员的自我修养</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bf5fGLG&amp;up=undefined" target="_blank" rel="external">GitHub上整理的一些工具</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRzHg9t&amp;up=" target="_blank" rel="external">一个印度程序员的生活领悟</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSV9mTN&amp;up=" target="_blank" rel="external">程序员如何在技术面试表现得更出色？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTWLi3a&amp;up=" target="_blank" rel="external">阿里员工的离职总结：如何在大公司生存？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRyBWvS&amp;up=" target="_blank" rel="external">技术人员必读的7佳高端访谈录</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSquaSs&amp;up=" target="_blank" rel="external">方法论丨程序员的有效学习策略</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfUNZ0H&amp;up=154" target="_blank" rel="external">麻省理工和加州理工的学霸是如何学习的?</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BUnJg5m&amp;up=" target="_blank" rel="external">写给程序猿的把妹指南:概述篇</a></li>
+<li><a href="http://mt.sohu.com/20151128/n428663716.shtml" target="_blank" rel="external">李嘉诚的人生修行：孤独是一种力量</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BN6RALJ&amp;up=" target="_blank" rel="external">要创业，你必须知道这些团队协作工具</a></li>
+</ul>
+<h1 id="PPT">PPT</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BXtbxhg&amp;up=" target="_blank" rel="external">史上最全PPT模板网站就在这里</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVooD0Y&amp;up=" target="_blank" rel="external">这里有最全的PPT模板资源，这里有全套的解决方案！</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVA3Zb0&amp;up=" target="_blank" rel="external">你们做的PPT为什么这么垃圾?</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRSp64r&amp;up=" target="_blank" rel="external">怎样做好学术 PPT？</a></li>
+</ul>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/30/fabric-2015-12-30/"  data-tooltip="fabric">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/27/wifi-crack-2015-11-27/" data-tooltip="WIFI密码破解">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/&amp;title=技术文章,每天读一点">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Gu Wen. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/30/fabric-2015-12-30/"  data-tooltip="fabric">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/27/wifi-crack-2015-11-27/" data-tooltip="WIFI密码破解">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/&amp;title=技术文章,每天读一点">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg"/>
+        
+            <h4 id="about-card-name">Gu Wen</h4>
+        
+            <h5 id="about-card-bio"></h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Research Developer</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Beijing,China
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'gwpost';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','sAak-7BafB4DU-SWLYCd','2.0.0');
+    </script>
+
+
+</html>

