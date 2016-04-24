@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Guwen's Studio]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://gwpost.github.com/"/>
-  <updated>2016-04-23T14:19:20.331Z</updated>
+  <updated>2016-04-24T02:52:54.003Z</updated>
   <id>http://gwpost.github.com/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Using Docker on RaspberryPi]]></title>
+    <link href="http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/"/>
+    <id>http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/</id>
+    <published>2016-04-24T02:31:17.000Z</published>
+    <updated>2016-04-24T02:52:54.003Z</updated>
+    <content type="html"><![CDATA[<p>一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。</p>
+<h2 id="1-_开启一个Docker的守护进程">1. 开启一个Docker的守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="operator">-d</span> &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="2-_开启IPv4转发">2. 开启IPv4转发</h2><p>容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打开。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.ip_forward</span><br></pre></td></tr></table></figure></p>
+<p>如果为 0，说明没有开启转发，则需要手动打开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.ipv4.ip_forward=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>如果在启动Docker服务的时候设定<code>--ip-forward=true</code>, Docker就会自动设定系统的<code>ip_forward</code>参数为1。</p>
+<h3 id="3-下载基础镜像并开启shell终端">3.下载基础镜像并开启shell终端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i resin/rpi-raspbian /bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="4-下载docker的示例项目">4.下载docker的示例项目</h3><p>我们创建了一个可以打包在Docker容器中的示例工程<a href="http://googlecreativelab.github.io/coder/" target="_blank" rel="external">Google’s Coder Project</a>，要想运行的话，需要从前几步的shell里退出来，然后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="operator">-d</span> -p <span class="number">8081</span>:<span class="number">8081</span> resin/rpi-google-coder</span><br></pre></td></tr></table></figure></p>
+<p>执行完上述命令之后，你就应该可以通过在浏览器里输入https://&lt;树莓派的ip地址&gt;:8081进入Google Coder开始hacking了。别忘了要使用<strong>HTTPS</strong>安全链接哟，普通的HTTP连接会被Google Coder挂起的。</p>
+<h3 id="5-如何让Dockerfiles在树莓派上跑起来">5.如何让Dockerfiles在树莓派上跑起来</h3><p>我们已经发布了一个Raspbian基础镜像，由于大部分的Dockerfiles是基于Ubuntu的镜像，同时呢Raspbian跟Ubuntu还是很像的（这里注明一下：Ubuntu是Debian Linux的一个衍生版，而Raspbian又是一个针对树莓派的修改定制版Debian，所以大家可以自行想象是否类似了），基本上只需要将命令”FROM ubuntu”改为”FROM resin/rpi-raspbian”然后构建就好。如果这个修改无效，那应该就是你的Dockerfiles有点儿小问题，希望你能够攻克这个难关然后顺利的制作一个树莓派的镜像。</p>
+<p>由于针对X86-64位制作的镜像是无法在树莓派上顺利工作的（CPU架构和指令集不一样，这里不再赘述），反之亦然，我们会询问你是否要为树莓派创建一个新的镜像，你可以通过使用 rpi-*作为前缀，方便其他人能够清楚的看到。同时也希望Docker团队能够为不同的系统提供更多的原生支持，但现在的话，这个也已经够用了。</p>
+<p>原文链接：<a href="http://blog.csdn.net/jeepxiaozi/article/details/40478309" target="_blank" rel="external">http://blog.csdn.net/jeepxiaozi/article/details/40478309</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。</p>
+<h2 id="1-_开启一个Docke]]>
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Installing Docker on RaspberryPi]]></title>

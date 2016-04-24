@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Guwen&#39;s Studio">
+    <title>Using Docker on RaspberryPi - Guwen&#39;s Studio</title>
+    <meta name="author" content="Gu Wen">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。
+1. 开启一个Docker的守护进程1docker -d &amp;amp;
+2. 开启IPv4转发容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Using Docker on RaspberryPi">
+<meta property="og:url" content="http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/index.html">
+<meta property="og:site_name" content="Guwen's Studio">
+<meta property="og:description" content="一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。
+1. 开启一个Docker的守护进程1docker -d &amp;amp;
+2. 开启IPv4转发容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打">
+<meta property="og:updated_time" content="2016-04-24T02:52:54.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Using Docker on RaspberryPi">
+<meta name="twitter:description" content="一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。
+1. 开启一个Docker的守护进程1docker -d &amp;amp;
+2. 开启IPv4转发容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打">
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Guwen&#39;s Studio</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Gu Wen</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-male"></i>
+                    <span class="sidebar-button-desc">About Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/gwpost" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:gwpost@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Using Docker on RaspberryPi
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sun Apr 24 2016 10:31:17 GMT+0800">
+	
+		    Apr 24, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/docker/">docker</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。</p>
+<h2 id="1-_开启一个Docker的守护进程">1. 开启一个Docker的守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="operator">-d</span> &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="2-_开启IPv4转发">2. 开启IPv4转发</h2><p>容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打开。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.ip_forward</span><br></pre></td></tr></table></figure></p>
+<p>如果为 0，说明没有开启转发，则需要手动打开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.ipv4.ip_forward=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>如果在启动Docker服务的时候设定<code>--ip-forward=true</code>, Docker就会自动设定系统的<code>ip_forward</code>参数为1。</p>
+<h3 id="3-下载基础镜像并开启shell终端">3.下载基础镜像并开启shell终端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i resin/rpi-raspbian /bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="4-下载docker的示例项目">4.下载docker的示例项目</h3><p>我们创建了一个可以打包在Docker容器中的示例工程<a href="http://googlecreativelab.github.io/coder/" target="_blank" rel="external">Google’s Coder Project</a>，要想运行的话，需要从前几步的shell里退出来，然后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="operator">-d</span> -p <span class="number">8081</span>:<span class="number">8081</span> resin/rpi-google-coder</span><br></pre></td></tr></table></figure></p>
+<p>执行完上述命令之后，你就应该可以通过在浏览器里输入https://&lt;树莓派的ip地址&gt;:8081进入Google Coder开始hacking了。别忘了要使用<strong>HTTPS</strong>安全链接哟，普通的HTTP连接会被Google Coder挂起的。</p>
+<h3 id="5-如何让Dockerfiles在树莓派上跑起来">5.如何让Dockerfiles在树莓派上跑起来</h3><p>我们已经发布了一个Raspbian基础镜像，由于大部分的Dockerfiles是基于Ubuntu的镜像，同时呢Raspbian跟Ubuntu还是很像的（这里注明一下：Ubuntu是Debian Linux的一个衍生版，而Raspbian又是一个针对树莓派的修改定制版Debian，所以大家可以自行想象是否类似了），基本上只需要将命令”FROM ubuntu”改为”FROM resin/rpi-raspbian”然后构建就好。如果这个修改无效，那应该就是你的Dockerfiles有点儿小问题，希望你能够攻克这个难关然后顺利的制作一个树莓派的镜像。</p>
+<p>由于针对X86-64位制作的镜像是无法在树莓派上顺利工作的（CPU架构和指令集不一样，这里不再赘述），反之亦然，我们会询问你是否要为树莓派创建一个新的镜像，你可以通过使用 rpi-*作为前缀，方便其他人能够清楚的看到。同时也希望Docker团队能够为不同的系统提供更多的原生支持，但现在的话，这个也已经够用了。</p>
+<p>原文链接：<a href="http://blog.csdn.net/jeepxiaozi/article/details/40478309" target="_blank" rel="external">http://blog.csdn.net/jeepxiaozi/article/details/40478309</a></p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/23/docker/docker-on-raspberrypi/" data-tooltip="Installing Docker on RaspberryPi">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/&amp;title=Using Docker on RaspberryPi">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Gu Wen. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/23/docker/docker-on-raspberrypi/" data-tooltip="Installing Docker on RaspberryPi">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/&amp;title=Using Docker on RaspberryPi">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <!--<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>-->
+<!--<div id="share-options-mask" class="share-options-mask"></div>-->
+
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg"/>
+        
+            <h4 id="about-card-name">Gu Wen</h4>
+        
+            <h5 id="about-card-bio"></h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Research Developer</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Beijing,China
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'gwpost';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','sAak-7BafB4DU-SWLYCd','2.0.0');
+    </script>
+
+
+</html>
