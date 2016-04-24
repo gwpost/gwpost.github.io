@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Guwen&#39;s Studio">
-    <title>Linux实用命令 - Guwen&#39;s Studio</title>
+    <title>Chapter2-Installing Docker - Guwen&#39;s Studio</title>
     <meta name="author" content="Gu Wen">
     
         <link rel="icon" href="/assets/images/favicon2.png">
@@ -14,40 +14,16 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="查看Linux系统位数
-12345uname -auname -muname -mfile  /sbin/init arch
-
-跨机文件或目录的复制
-
-
-
-从本地复制到远程-复制文件  
-12scp local_file remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下scp local_file remote_usern">
+    <meta name="description" content="PrerequisitesDocker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Linux实用命令">
-<meta property="og:url" content="http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/index.html">
+<meta property="og:title" content="Chapter2-Installing Docker">
+<meta property="og:url" content="http://gwpost.github.com/2016/04/20/docker/docker-chapter2/index.html">
 <meta property="og:site_name" content="Guwen's Studio">
-<meta property="og:description" content="查看Linux系统位数
-12345uname -auname -muname -mfile  /sbin/init arch
-
-跨机文件或目录的复制
-
-
-
-从本地复制到远程-复制文件  
-12scp local_file remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下scp local_file remote_usern">
-<meta property="og:updated_time" content="2016-01-15T06:59:47.875Z">
+<meta property="og:description" content="PrerequisitesDocker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are">
+<meta property="og:updated_time" content="2016-04-23T13:32:18.385Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux实用命令">
-<meta name="twitter:description" content="查看Linux系统位数
-12345uname -auname -muname -mfile  /sbin/init arch
-
-跨机文件或目录的复制
-
-
-
-从本地复制到远程-复制文件  
-12scp local_file remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下scp local_file remote_usern">
+<meta name="twitter:title" content="Chapter2-Installing Docker">
+<meta name="twitter:description" content="PrerequisitesDocker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are">
     
     
     
@@ -190,19 +166,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Linux实用命令
+            Chapter2-Installing Docker
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Tue Nov 10 2015 22:21:09 GMT+0800">
+    <time itemprop="datePublished" content="Wed Apr 20 2016 15:45:35 GMT+0800">
 	
-		    Nov 10, 2015
+		    Apr 20, 2016
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/linux/">linux</a>
+    <a class="category-link" href="/categories/dokcer/">dokcer</a>
 
 
     
@@ -211,30 +187,11 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <ol>
-<li><p>查看Linux系统位数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uname <span class="operator">-a</span></span><br><span class="line">uname -m</span><br><span class="line">uname -m</span><br><span class="line">file  /sbin/init </span><br><span class="line">arch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>跨机文件或目录的复制</p>
-</li>
-</ol>
-<ul>
-<li><p>从本地复制到远程-复制文件  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下</span><br><span class="line">scp <span class="built_in">local</span>_file remote_username@remote_ip:remote_folder/remote_file  文件重命名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从本地复制到远程-复制目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r <span class="built_in">local</span>_folder remote_username@remote_ip:remote_folder   复制到remote_folder文件夹下</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从远程复制到本地-复制文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp remote_username@remote_ip:remote_folder/remote_file  <span class="built_in">local</span>_file   在本地当前路径创建<span class="built_in">local</span>_file</span><br><span class="line">scp remote_username@remote_ip:remote_folder/remote_file  <span class="built_in">local</span>_folder  复制到<span class="built_in">local</span>_folder文件夹下</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从远程复制到本地-复制目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp  -r  remote_username@remote_ip:remote_folder <span class="built_in">local</span>_folder   复制到<span class="built_in">local</span>_folder文件夹下</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Ubuntu安装Atom">Ubuntu安装Atom</h1><p>sudo add-apt-repository ppa:webupd8team/atom<br>sudo apt-get update<br>sudo apt-get install atom</p>
-<h1 id="Ubuntu卸载Atom">Ubuntu卸载Atom</h1><p>sudo apt-get remove atom<br>sudo add-apt-repository –remove ppa:webupd8team/atom</p>
-<p>以上只会卸载该软件，要卸载附加的一些软件包，请使用以下命令卸载多余的软件包：<br>sudo apt-get autoremove</p>
+            <h2 id="Prerequisites">Prerequisites</h2><p>Docker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are also acceptable.</p>
+<p>To check your current kernel version, open a terminal and use <code>uname -r</code> to display your kernel version:</p>
+<h2 id="Installing_docker">Installing docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install docker</span><br></pre></td></tr></table></figure>
+<h3 id="Adding_current_user_to_docker_group">Adding current user to docker group</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd <span class="operator">-a</span> &lt;your_login&gt; docker</span><br></pre></td></tr></table></figure>
+<p>Now, you can execute docker without root authority.</p>
 
             
                 
@@ -249,7 +206,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/11/docker/docker-2015-11-11/"  data-tooltip="Docker学习">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/"  data-tooltip="Chapter3-Getting Started with Docker">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -257,7 +214,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/16/raspberrypi/network/" data-tooltip="配置树莓派无线网络">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -272,19 +229,19 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/&amp;title=Linux实用命令">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/&amp;title=Chapter2-Installing Docker">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
@@ -330,7 +287,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/11/docker/docker-2015-11-11/"  data-tooltip="Docker学习">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/"  data-tooltip="Chapter3-Getting Started with Docker">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -338,7 +295,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/16/raspberrypi/network/" data-tooltip="配置树莓派无线网络">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -353,19 +310,19 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/&amp;title=Linux实用命令">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/&amp;title=Chapter2-Installing Docker">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
@@ -391,17 +348,17 @@
                 <!--<div id="share-options-bar" class="share-options-bar" data-behavior="1">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2015/11/10/linux/linux-2015-11-10/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>

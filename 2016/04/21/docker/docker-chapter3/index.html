@@ -14,16 +14,19 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="guwen,blog">
+    <meta name="description" content="We’re going to start with checking that Docker is working correctly, and then we’re going to take a look at the basic Docker workflow: creating and managing containers. We’ll take a container through">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Chapter3-Getting Started with Docker">
 <meta property="og:url" content="http://gwpost.github.com/2016/04/21/docker/docker-chapter3/index.html">
 <meta property="og:site_name" content="Guwen's Studio">
-<meta property="og:description" content="guwen,blog">
-<meta property="og:updated_time" content="2016-04-21T12:20:54.077Z">
+<meta property="og:description" content="We’re going to start with checking that Docker is working correctly, and then we’re going to take a look at the basic Docker workflow: creating and managing containers. We’ll take a container through">
+<meta property="og:image" content="http://gwpost.github.com/./docker-info.png">
+<meta property="og:image" content="http://gwpost.github.com/./run.png">
+<meta property="og:image" content="http://gwpost.github.com/./ps.png">
+<meta property="og:updated_time" content="2016-04-22T03:06:06.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter3-Getting Started with Docker">
-<meta name="twitter:description" content="guwen,blog">
+<meta name="twitter:description" content="We’re going to start with checking that Docker is working correctly, and then we’re going to take a look at the basic Docker workflow: creating and managing containers. We’ll take a container through">
     
     
     
@@ -187,7 +190,30 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <p>We’re going to start with <strong>checking that Docker is working correctly</strong>, and then we’re going to take a look at the basic Docker workflow: <strong>creating and managing containers</strong>. We’ll take a container through its typical lifecycle from <strong>creation to a managed state and then stop and remove it</strong>.</p>
+<h2 id="Ensuring_Docker_is_ready">Ensuring Docker is ready</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker info</span><br></pre></td></tr></table></figure>
+<p>This will show a list of any <strong>containers</strong>, any <strong>images</strong> (the building blocks Docker uses to build containers), the execution and <strong>storage drivers Docker</strong> is using, and its <strong>basic configuration</strong>.<br><img src="./docker-info.png" alt=""></p>
+<p>The single binary, docker, can act as both <strong>client and server</strong>. As a client, the docker binary passes requests to the Docker daemon (e.g., asking it to return information about itself), and then processes those requests when they are returned.</p>
+<h2 id="Building_our_first_container">Building our first container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+<p>The <strong>-i</strong> flag keeps STDIN open from the container, even if we’re not attached to it. This persistent standard input is one half of what we need for an interactive shell.<br>The <strong>-t</strong> flag is the other half and tells Docker to assign a pseudo-tty to the container we’re about to create. This provides us with an interactive shell in the new container.<br><img src="./run.png" alt=""></p>
+<h2 id="Working_with_our_first_container">Working with our first container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Checking the container's hostname</span></span><br><span class="line">hostname</span><br><span class="line"><span class="comment"># Checking the container's /etc/hosts</span></span><br><span class="line">cat /etc/hosts</span><br><span class="line"><span class="comment"># Checking the container's interfaces</span></span><br><span class="line">ip a</span><br><span class="line"><span class="comment"># Checking container's processes</span></span><br><span class="line">ps -aux</span><br><span class="line"><span class="comment"># Installing a package in our first container</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line"><span class="comment"># When you're done, type exit, and you'll return to the command prompt of your Ubuntu host</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h1 id="Listing_containers">Listing containers</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps <span class="operator">-a</span></span><br></pre></td></tr></table></figure>
+<p><img src="./ps.png" alt=""><br>Once we exited the container, that command ended, and the container was stopped.The container still exists.</p>
+<h2 id="Container_naming">Container naming</h2><p>If we want to specify a particular container name in place of the automatically generated name, we can do so using the <code>--name</code> flag.<br>Names are unique. If we try to create two containers with the same name, the command will fail. We need to delete the previous container with the same name before we can create a new one. We can do so with the docker rm command.</p>
+<h2 id="Starting_a_stopped_container">Starting a stopped container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker start bob_the_container</span><br></pre></td></tr></table></figure>
+<h2 id="Attaching_to_a_container">Attaching to a container</h2><p>There is an interactive session waiting on our running container. We can reattach to that session using the docker attach command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker attach bob_the_container</span><br></pre></td></tr></table></figure></p>
+<p>You might need to hit <strong>Enter</strong> to bring up the prompt.</p>
+<h2 id="Creating_daemonized_containers">Creating daemonized containers</h2><p>Daemonized containers don’t have the interactive session we’ve just used and are ideal for running applications and services.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --name daemon_dave <span class="operator">-d</span> ubuntu /bin/sh -c <span class="string">"while true; do echo hello world; sleep 1; done"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Seeing_what’s_happening_inside_our_container">Seeing what’s happening inside our container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker logs daemon_dave</span><br><span class="line">sudo docker logs <span class="operator">-f</span> daemon_dave</span><br></pre></td></tr></table></figure>
+<h2 id="Inspecting_the_container’s_processes">Inspecting the container’s processes</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker top daemon_dave</span><br></pre></td></tr></table></figure>
+<h2 id="Stopping_a_daemonized_container">Stopping a daemonized container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker stop daemon_dave</span><br></pre></td></tr></table></figure>
+<h2 id="Showing_the_last_X_containers,_running_or_stopped">Showing the last <code>X</code> containers, running or stopped</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -n x</span><br></pre></td></tr></table></figure>
+<h2 id="Finding_out_more_about_our_container">Finding out more about our container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker inspect daemon_dave</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Selectively inspecting a container</span></span><br><span class="line">sudo docker inspect --format=<span class="string">'&#123;&#123; .State.Running &#125;&#125;'</span> daemon_dave</span><br></pre></td></tr></table></figure>
+<p>Docker works by exploring the <strong>/var/lib/docker</strong> directory. This directory holds your <strong>images, containers, and container configuration</strong>. You’ll find all your containers in the <strong>/var/lib/docker/containers</strong> directory.</p>
+<h2 id="Deleting_a_container">Deleting a container</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deleting multi containers</span></span><br><span class="line">sudo docker rm <span class="number">80430</span>f8d0921 <span class="number">80430</span>f8d0921</span><br><span class="line"><span class="comment"># Deleting all containers</span></span><br><span class="line">docker rm `docker ps <span class="operator">-a</span> -q`</span><br></pre></td></tr></table></figure>
+<h2 id="Geting_help">Geting help</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">help</span> run</span><br><span class="line">man docker-run</span><br></pre></td></tr></table></figure>
+
             
                 
 
@@ -201,7 +227,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/22/docker/docker-chapter4/"  data-tooltip="Chapter4-Working with Docker images and repositories">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -209,7 +235,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter4/" data-tooltip="Chapter4-Working with Docker images and repositories">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/20/docker/docker-chapter2/" data-tooltip="Chapter2-Installing Docker">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -257,7 +283,6 @@
         </li>
     </ul>
 </div>
-
 
         
             <div id="disqus_thread">
@@ -283,7 +308,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/22/docker/docker-chapter4/"  data-tooltip="Chapter4-Working with Docker images and repositories">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -291,7 +316,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter4/" data-tooltip="Chapter4-Working with Docker images and repositories">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/20/docker/docker-chapter2/" data-tooltip="Chapter2-Installing Docker">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -340,9 +365,8 @@
     </ul>
 </div>
 
-
                 </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+                <!--<div id="share-options-bar" class="share-options-bar" data-behavior="1">
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/21/docker/docker-chapter3/">
@@ -360,8 +384,9 @@
             </a>
         </li>
     </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
+</div>-->
+<!--<div id="share-options-mask" class="share-options-mask"></div>-->
+
             
         </div>
         <div id="about">

@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Guwen&#39;s Studio">
+    <title>Chapter4-Working with Docker images and repositories - Guwen&#39;s Studio</title>
+    <meta name="author" content="Gu Wen">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold ima">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Chapter4-Working with Docker images and repositories">
+<meta property="og:url" content="http://gwpost.github.com/2016/04/22/docker/docker-chapter4/index.html">
+<meta property="og:site_name" content="Guwen's Studio">
+<meta property="og:description" content="We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold ima">
+<meta property="og:image" content="http://gwpost.github.com/./filesystem.png">
+<meta property="og:image" content="http://gwpost.github.com/./search.png">
+<meta property="og:updated_time" content="2016-04-22T07:42:30.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter4-Working with Docker images and repositories">
+<meta name="twitter:description" content="We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold ima">
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Guwen&#39;s Studio</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Gu Wen</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-male"></i>
+                    <span class="sidebar-button-desc">About Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/gwpost" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:gwpost@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Chapter4-Working with Docker images and repositories
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Apr 22 2016 20:04:56 GMT+0800">
+	
+		    Apr 22, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/docker/">docker</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>We’ll learn a lot more about Docker images, <strong>what they are, how to manage them, how to modify them, and how to create, store, and share your own images</strong>.We’ll also examine the <strong>repositories</strong> that hold images and the <strong>registries</strong> that store repositories.</p>
+<h2 id="Images">Images</h2><ol>
+<li>Docker images is the building blocks from which we launch containers.</li>
+<li>A Docker image is made up of filesystems layered over each other. At the base is a <strong>boot filesystem</strong>, <strong>bootfs</strong>, which resembles the typical Linux/Unix boot filesystem. A Docker user will probably never interact with the boot filesystem. Indeed, when a container has booted, it is moved into memory, and the boot filesystem is unmounted to free up the RAM used by the initrd disk image.</li>
+<li>Docker next layers a <strong>root filesystem</strong>, <strong>rootfs</strong>, on top of the boot filesystem. This rootfs can be one or more <strong>operating systems</strong> (e.g., a Debian or Ubuntu filesystem).<br>In the Docker world, however, the root filesystem stays in <strong>read-only</strong> mode, and Docker takes advantage of a <strong>union mount</strong> to add more read-only filesystems onto the root filesystem.<br>The <strong>union mount</strong> overlays the filesystems on top of one another so that the resulting filesystem may contain files and subdirectories from any or all of the underlying filesystems.</li>
+<li>Docker calls each of these filesystems <strong>images</strong>.</li>
+<li>The image below is called the <strong>parent image</strong> and you can traverse each layer until you reach the bottom of the image stack where the final image is called the <strong>base image</strong>.</li>
+<li>When a container is launched from an image, Docker mounts a <strong>read-write</strong> filesystem on top of any layers below.This is where whatever processes we want our Docker container to run will execute.</li>
+<li>When Docker first starts a container, the initial read-write layer is empty. As changes occur, they are applied to this layer;</li>
+<li>This pattern is traditionally called <strong>“copy on write”</strong> and is one of the features that makes Docker so powerful. Each read-only image layer is <strong>read-only</strong>; this image never changes. When a container is created, Docker builds from the stack of images and then adds the <strong>read-write</strong> layer on top. That layer, combined with the knowledge of the image layers below it and some configuration data, form the container.</li>
+</ol>
+<p><img src="./filesystem.png" alt=""></p>
+<h2 id="Listing_Docker_images">Listing Docker images</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sudo</span> docker images</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Local images live on our local Docker host in the <strong>/var/lib/docker directory</strong>. Each image will be inside a directory named for your <strong>storage driver</strong>;for example, <strong>aufs</strong> or <strong>devicemapper</strong>.</li>
+<li>Images are stored in repositories. You can think of an image repository as being much like a <strong>Git repository</strong>. It contains images, layers, and metadata about those images.</li>
+<li>We identify each image inside that repository by what Docker calls <strong>tags</strong>.</li>
+<li>We can refer to a specific image inside a repository by suffixing the repository name with <strong>a colon and a tag name</strong>.</li>
+</ol>
+<h2 id="Repositories">Repositories</h2><p>There are two types of repositories: <strong>user repositories</strong>, which contain images contributed by Docker users, and <strong>top-level repositories</strong>, which are controlled by the people behind Docker.A user repository takes the form of a <strong>username and a repository name</strong>.A top-level repository only has a <strong>repository name</strong> like ubuntu.</p>
+<h2 id="Pulling_images">Pulling images</h2><p> When we run a container from images with the <strong>docker run</strong> command,by default,if you don’t specify a specific tag, Docker will download the <strong>latest tag</strong>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Pulling the fedora image</span></span><br><span class="line">sudo docker pull fedora</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Viewing the fedora image</span></span><br><span class="line">sudo docker images fedora</span><br></pre></td></tr></table></figure>
+<h2 id="Searching_for_images">Searching for images</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker search puppet</span><br></pre></td></tr></table></figure>
+<p><img src="./search.png" alt=""></p>
+<h2 id="Two_ways_to_create_a_Docker_image">Two ways to create a Docker image</h2><ol>
+<li>Via the <strong>docker commit</strong> command(Not recommended);</li>
+<li>Via the <strong>docker build</strong> command with a Dockerfile;  </li>
+</ol>
+<h2 id="Using_Docker_commit_to_create_images">Using Docker commit to create images</h2><h3 id="Logging_into_the_Docker_Hub">Logging into the Docker Hub</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker login</span><br></pre></td></tr></table></figure>
+<h3 id="Committing_the_custom_container">Committing the custom container</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To find the ID of the last created container</span></span><br><span class="line">docker ps <span class="operator">-l</span> -q</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Commit the comtainer</span></span><br><span class="line">sudo docker commit <span class="number">4</span>aab3ce3cb76 jamtur01/apache2</span><br></pre></td></tr></table></figure>
+<p>The docker commit command only commits the differences between the image the container was created from and the current state of the container.</p>
+<h2 id="Building_images_with_a_Dockerfile">Building images with a Dockerfile</h2><h3 id="Docker_executing_instructions_roughly_follow_a_workflow">Docker executing instructions roughly follow a workflow</h3><ul>
+<li>Docker runs a container from the image；</li>
+<li>An instruction executes and makes a change to the container；</li>
+<li>Docker runs the equivalent of docker commit to commit a new layer；</li>
+<li>Docker then runs a new container from this new image；</li>
+<li>The next instruction in the file is executed, and the process repeats until all instructions have been executed；</li>
+</ul>
+<h3 id="The_RUN_instruction_in_exec_form">The RUN instruction in exec form</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN [ <span class="string">"apt-get"</span>, <span class="string">" install"</span>, <span class="string">"-y"</span>, <span class="string">"nginx"</span> ]</span><br></pre></td></tr></table></figure>
+<h3 id="Running_the_Dockerfile">Running the Dockerfile</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=<span class="string">"jamtur01/static_web"</span> .</span><br></pre></td></tr></table></figure>
+<p><strong>-t</strong> option to mark our resulting image with a repository and a name</p>
+<h3 id="Dockerfiles_and_the_build_cache">Dockerfiles and the build cache</h3><p>If we did not need to change anything in Steps 1 to 3, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 4.</p>
+<h3 id="Using_the_docker_history_command">Using the docker history command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># see each of the image layers inside  image and the Dockerfile instruction that created them.</span></span><br><span class="line">sudo docker <span class="built_in">history</span> <span class="number">22</span>d47c8cb6e5</span><br></pre></td></tr></table></figure>
+<h3 id="Viewing_the_Docker_port_mapping">Viewing the Docker port mapping</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Exposing a port with docker run</span></span><br><span class="line">sudo docker run <span class="operator">-d</span> -P --name static_web jamtur01/static_web</span><br></pre></td></tr></table></figure>
+<p>Docker also has a shortcut, -P, that allows us to expose all ports we’ve specified via EXPOSE instructions in our Dockerfile.It would also expose any additional ports we had specified with other EXPOSE instructions in the Dockerfile that built our image.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Viewing the Docker port mapping</span></span><br><span class="line">sudo docker ps <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The docker port command</span></span><br><span class="line">sudo docker port <span class="number">6751</span>b94bb5c0 <span class="number">80</span></span><br></pre></td></tr></table></figure>
+<p>We’ve specified the container ID and the container port for which we’d like to see the mapping.</p>
+<h2 id="Dockerfile_instructions">Dockerfile instructions</h2><h3 id="FROM">FROM</h3><h3 id="MAINTAINER">MAINTAINER</h3><h3 id="ENV">ENV</h3><h3 id="RUN">RUN</h3><p>The RUN instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting committed image will be used for the next step in the Dockerfile.</p>
+<p>RUN是在<strong>building image</strong>时会运行的指令, 在Dockerfile中可以写多条RUN指令.<br>CMD和ENTRYPOINT则是在运行container 时会运行的指令, 都只能写<strong>一条</strong>, 如果写了多条, 则<strong>最后一条生效</strong>.<br>CMD和ENTRYPOINT的区别是:CMD在运行时会被command<strong>覆盖</strong>, ENTRYPOINT不会被运行时的command覆盖, 但是也可以指定.</p>
+<h3 id="CMD">CMD</h3><p>The CMD instruction specifies the command to run when a container is <strong>launched</strong>. It is similar to the RUN instruction, but rather than running the command when the container is being built, it will specify the command to run when the container is launched, much like specifying a command to run when launching a container with the docker run command.</p>
+<p>You can also specify the CMD instruction without an array, in which case Docker will prepend /bin/sh -c to the command. This may result in unexpected behavior when the command is executed. As a result, it is recommended that you always use the array syntax.</p>
+<p>Instead of launching a shell, the container merely returned the list of running processes and stopped, overriding the command specified in the CMD instruction.</p>
+<h3 id="ENTRYPOINT">ENTRYPOINT</h3><p>The ENTRYPOINT instruction provides a command that isn’t as easily overridden. Instead, any arguments we specify on the docker run command line will be passed as arguments to the command specified in the ENTRYPOINT.</p>
+<h3 id="WORKDIR">WORKDIR</h3><p>The WORKDIR instruction provides a way to set the working directory for the con- tainer and the ENTRYPOINT and/or CMD to be executed when a container is launched from the image.</p>
+<p>You can override the working directory at runtime with the -w flag,</p>
+<h3 id="ENV-1">ENV</h3><p>The ENV instruction is used to set environment variables during the image build process.<br>You can also pass environment variables on the docker run command line using the -e flag.</p>
+<h3 id="USER">USER</h3><p>The USER instruction specifies a user that the image should be run as.<br>You can also override this at runtime by specifying the -<strong>u</strong> flag with the <strong>docker run</strong> command.<br>The default user if you don’t specify the USER instruction is <strong>root</strong>.</p>
+<h3 id="VOLUME">VOLUME</h3><p>The VOLUME instruction adds volumes to any container created from the image. A volume is a specially designated directory within one or more containers that bypasses the Union File System to provide several useful features for persistent or shared data:</p>
+<ul>
+<li>Volumes can be shared and reused between containers.</li>
+<li>A container doesn’t have to be running to share its volumes.</li>
+<li>Changes to a volume are made directly.</li>
+<li>Changes to a volume will not be included when you update an image.</li>
+<li>Volumes persist until no containers use them.</li>
+</ul>
+<p>This allows us to add data (like source code), a database, or other content into an image without committing it to the image and allows us to share that data between containers. This can be used to do testing with containers and an application’s code, manage logs, or handle databases inside a container.</p>
+<h3 id="ADD">ADD</h3><p>The ADD instruction adds files and directories from our build environment into our image.<br>When ADD’ing files Docker uses the ending character of the destination to deter- mine what the source is. If the destination ends in a /, then it considers the source a directory. If it doesn’t end in a /, it considers the source a file.<br>If a tar archive (valid archive types include gzip, bzip2, xz) is specified as the source file, then Docker will automatically unpack it for you.<br>New files and directories will be created with a mode of 0755 and a UID and GID of 0.</p>
+<h3 id="COPY">COPY</h3><p>The COPY instruction is purely focused on copying local files from the build context and does not have any extraction or decompression capabilities.</p>
+<p>The source of the files must be the path to a file or directory relative to the build context, the local source directory in which your Dockerfile resides. You cannot copy anything that is outside of this directory, because the build context is up- loaded to the Docker daemon, and the copy takes place there.</p>
+<p>Any files and directories created by the copy will have a UID and GID of 0.</p>
+<h3 id="ONBUILD">ONBUILD</h3><p>The ONBUILD instruction adds triggers to images. A trigger is executed when the image is used as the basis of another image.<br>The ONBUILD triggers are executed in the order specified in the parent image and are only inherited once.</p>
+<h2 id="Pushing_images_to_the_Docker_Hub">Pushing images to the Docker Hub</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker push static_web</span><br></pre></td></tr></table></figure>
+<h2 id="Deleting_an_image">Deleting an image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rmi jamtur01/static_web</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deleting all images</span></span><br><span class="line">sudo docker rmi `docker images <span class="operator">-a</span> -q`</span><br></pre></td></tr></table></figure>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/23/docker/docker-on-raspberrypi/"  data-tooltip="Installing Docker on RaspberryPi">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/" data-tooltip="Chapter3-Getting Started with Docker">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/&amp;title=Chapter4-Working with Docker images and repositories">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Gu Wen. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/23/docker/docker-on-raspberrypi/"  data-tooltip="Installing Docker on RaspberryPi">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/" data-tooltip="Chapter3-Getting Started with Docker">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/&amp;title=Chapter4-Working with Docker images and repositories">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                </div>
+                <!--<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/22/docker/docker-chapter4/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>-->
+<!--<div id="share-options-mask" class="share-options-mask"></div>-->
+
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg"/>
+        
+            <h4 id="about-card-name">Gu Wen</h4>
+        
+            <h5 id="about-card-bio"></h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Research Developer</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Beijing,China
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'gwpost';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','sAak-7BafB4DU-SWLYCd','2.0.0');
+    </script>
+
+
+</html>
