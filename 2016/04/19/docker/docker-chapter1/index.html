@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Guwen&#39;s Studio">
-    <title>Chapter2-Installing Docker on Ubuntu - Guwen&#39;s Studio</title>
+    <title>Chapter1-Introduction - Guwen&#39;s Studio</title>
     <meta name="author" content="Gu Wen">
     
         <link rel="icon" href="/assets/images/favicon2.png">
@@ -14,23 +14,16 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="Requirements
-Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently supported.
-Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and later wi">
+    <meta name="description" content="Introducing DockerDocker is an open-source engine that automates the deployment of applications into containers. It was written by the team at Docker, Inc (formerly dotCloud Inc, an early player in th">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Chapter2-Installing Docker on Ubuntu">
-<meta property="og:url" content="http://gwpost.github.com/2016/04/20/docker/docker-chapter2/index.html">
+<meta property="og:title" content="Chapter1-Introduction">
+<meta property="og:url" content="http://gwpost.github.com/2016/04/19/docker/docker-chapter1/index.html">
 <meta property="og:site_name" content="Guwen's Studio">
-<meta property="og:description" content="Requirements
-Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently supported.
-Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and later wi">
-<meta property="og:image" content="http://gwpost.github.com/./uname.png">
-<meta property="og:updated_time" content="2016-05-05T11:04:07.861Z">
+<meta property="og:description" content="Introducing DockerDocker is an open-source engine that automates the deployment of applications into containers. It was written by the team at Docker, Inc (formerly dotCloud Inc, an early player in th">
+<meta property="og:updated_time" content="2016-05-05T08:54:40.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter2-Installing Docker on Ubuntu">
-<meta name="twitter:description" content="Requirements
-Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently supported.
-Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and later wi">
+<meta name="twitter:title" content="Chapter1-Introduction">
+<meta name="twitter:description" content="Introducing DockerDocker is an open-source engine that automates the deployment of applications into containers. It was written by the team at Docker, Inc (formerly dotCloud Inc, an early player in th">
     
     
     
@@ -173,13 +166,13 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Chapter2-Installing Docker on Ubuntu
+            Chapter1-Introduction
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Wed Apr 20 2016 15:45:35 GMT+0800">
+    <time itemprop="datePublished" content="Tue Apr 19 2016 15:45:35 GMT+0800">
 	
-		    Apr 20, 2016
+		    Apr 19, 2016
     	
     </time>
     
@@ -194,27 +187,44 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="Requirements">Requirements</h2><ul>
-<li>Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently supported.</li>
-<li>Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and later will run Docker successfully. Your results will greatly vary, though, and if you need support you will often be asked to run on a more recent kernel.</li>
-<li>The kernel must support an appropriate storage driver. For example,<br>– Device Mapper<br>– AUFS<br>– vfs.<br>– btrfs<br>– The default storage driver is usually Device Mapper.</li>
-<li>cgroups and namespaces kernel features must be supported and enabled.</li>
+            <h2 id="Introducing_Docker">Introducing Docker</h2><p>Docker is an open-source engine that automates the deployment of applications into containers. It was written by the team at Docker, Inc (formerly <strong>dotCloud Inc</strong>, an early player in the Platform-as-a-Service (PAAS) market), and released by them under the Apache 2.0 license. Docker adds an application deployment engine on top of a virtualized container execution environment. It is designed to provide a lightweight and fast environment in which to run your code as well as <strong>an efficient workflow to get that code from your laptop to your test environment and then into production</strong>. Docker is incredibly simple. Indeed, you can get started with Docker on a minimal host running nothing but a <strong>compatible Linux kernel and a Docker binary</strong>.</p>
+<p>Unlike hypervisor virtualization, where one or more independent machines run virtually on <strong>physical hardware</strong> via an intermediation layer, containers instead run user space on top of an operating system’s kernel. As a result, container virtualization is often called operating system-level virtualization.</p>
+<p>It can generally only run the <strong>same or a similar</strong> guest operating system as the underlying host. For example, you can run Red Hat Enterprise Linux on an Ubuntu server, but you can’t run Microsoft Windows on top of an Ubuntu server</p>
+<h2 id="Characters_of_Dokcer">Characters of Dokcer</h2><h3 id="1-_An_easy_and_lightweight_way_to_model_reality">1. An easy and lightweight way to model reality</h3><p>You can Dockerize your application in minutes. Docker relies on a copy-on-write model so that making changes to your application is also incredibly fast: only what you want to change gets changed.</p>
+<p>You can then create containers running your applications. Most Docker containers take less than a second to launch.</p>
+<h3 id="2-_A_logical_segregation_of_duties">2. A logical segregation of duties</h3><p>With Docker, Developers care about their applications running inside containers, and Operations cares about managing the containers.</p>
+<h3 id="3-_Fast,_efficient_development_life_cycle">3. Fast, efficient development life cycle</h3><p>Docker aims to reduce the cycle time between code being written and code being tested, deployed, and used.</p>
+<h3 id="4-_Encourages_service_orientated_architecture">4. Encourages service orientated architecture</h3><p>Docker recommends that each container run a single application or process. This makes it very easy to distribute, scale, debug and introspect your applications.</p>
+<h2 id="Docker_components">Docker components</h2><h3 id="1-_Docker_client_and_server">1. Docker client and server</h3><p>Docker is a client-server application. The Docker client talks to the Docker server or daemon, which, in turn, does all the work. Docker ships with a command line client binary, docker, as well as a full RESTful API. You can run the Docker daemon and client on the same host or connect your local Docker client to a remote daemon running on another host.</p>
+<h3 id="2-_Docker_images">2. Docker images</h3><p>You can consider images to be the “source code” for your containers.</p>
+<h3 id="3-_Registries">3. Registries</h3><p>There are two types of registries: <strong>public and private</strong>.</p>
+<h3 id="4-_Containers">4. Containers</h3><p>containers are launched from images and can contain one or more running processes. You can think about images as the building or packing aspect of Docker and the containers as the running or execution aspect of Docker.</p>
+<p>A Docker container is:</p>
+<ul>
+<li>An image format.</li>
+<li>A set of standard operations.</li>
+<li>An execution environment.</li>
 </ul>
-<h2 id="Checking_for_prerequisites">Checking for prerequisites</h2><h3 id="1-_Checking_for_Kernel">1. Checking for Kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname <span class="operator">-a</span></span><br></pre></td></tr></table></figure>
-<p><img src="./uname.png" alt=""></p>
-<p>If, however, we’re using an earlier release of Ubuntu 12.04 Precise, we may have a 3.2 kernel. We can easily upgrade our Ubuntu 12.04 to the later kernel; for example, at the time of writing, the 3.8 kernel was available to install via <code>apt-get</code>.</p>
-<h3 id="2-_Checking_for_Device_Mapper">2. Checking for Device Mapper</h3><p>We’re going to make use of the Device Mapper storage driver.Device Mapper should be installed on any Ubuntu 12.04 or later hosts, but we can confirm it is installed like so:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l <span class="regexp">/sys/</span><span class="keyword">class</span><span class="regexp">/misc/</span>device-mapper</span><br></pre></td></tr></table></figure></p>
-<p>We could also check in /proc/devices for a device-mapper entry.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grep device-mapper /proc/devices</span><br></pre></td></tr></table></figure></p>
-<p>If neither is present, we can also try to load the dm_mod module.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe dm_mod</span><br></pre></td></tr></table></figure></p>
-<h2 id="Installing_docker">Installing docker</h2><p>First, we add the Docker APT repository. You may be prompted to confirm that you wish to add the repository and have the repositories GPG automatically added to your host.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">"echo deb https://get.docker.io/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list"</span></span><br></pre></td></tr></table></figure></p>
-<p>Adding the Docker repository GPG key<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="operator">-s</span> https://get.docker.io/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure></p>
-<p>Now, we update our APT sources.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p>We can now install the Docker package itself.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lxc-docker</span><br></pre></td></tr></table></figure></p>
-<h2 id="Docker_installation_script">Docker installation script</h2><p>There is also an alternative method available to install Docker on an appropriate host using a remote installation script.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.docker.io/ | sudo sh</span><br></pre></td></tr></table></figure></p>
-<h2 id="The_Docker_daemon">The Docker daemon</h2><p>After we’ve installed Docker, we need to confirm that the Docker daemon is run- ning. Docker runs as a root-privileged daemon process to allow it to handle op- erations that can’t be executed by normal users (e.g., mounting filesystems). The docker binary runs as a client of this daemon and also requires root privileges to run.</p>
-<p>The Docker daemon should be started by default when the Docker package is installed. By default, the daemon listens on a Unix socket at /var/run/docker.↩ sock for incoming Docker requests. If a group named docker exists on our system, Docker will apply ownership of the socket to that group. Hence, any user that belongs to the docker group can run Docker without needing to use the sudo command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd <span class="operator">-a</span> &lt;your_login&gt; docker</span><br></pre></td></tr></table></figure></p>
-<p>Now, you can execute docker without root authority.</p>
-<h2 id="Checking_that_the_Docker_daemon_is_running">Checking that the Docker daemon is running</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Checking the status of the Docker daemon</span></span><br><span class="line">sudo status docker docker</span><br><span class="line"><span class="comment">## Starting Docker</span></span><br><span class="line">sudo start docker</span><br><span class="line"><span class="comment">## Stooping Docker</span></span><br><span class="line">sudo stop docker</span><br></pre></td></tr></table></figure>
+<p>Docker borrows the concept of the standard shipping container, used to transport goods globally, as a model for its containers. But instead of shipping goods, Docker containers ship software.</p>
+<h2 id="What_can_you_use_Docker_for?">What can you use Docker for?</h2><ul>
+<li>Helping make your local development and build workflow faster, more ef- ficient, and more lightweight. Local developers can build, run, and share Docker containers. Containers can be built in development and promoted to testing environments and, in turn, to production.</li>
+<li>Running stand-alone services and applications consistently across multiple environments, a concept especially useful in service-oriented architectures and deployments that rely heavily on micro-services.</li>
+<li>Using Docker to create isolated instances to run tests like, for example, those launched by a Continuous Integration (CI) suite like Jenkins CI.</li>
+<li>Building and testing complex applications and architectures on a local host prior to deployment into a production environment.</li>
+<li>Building a multi-user Platform-as-a-Service (PAAS) infrastructure.</li>
+<li>Providing lightweight stand-alone sandbox environments for developing, testing, and teaching technologies, such as the Unix shell or a programming language.</li>
+<li>Software as a Service applications; for example, Memcached as a service.</li>
+<li>Highly performant, hyperscale deployments of hosts.</li>
+</ul>
+<h2 id="Docker’s_technical_components">Docker’s technical components</h2><ul>
+<li>Docker can be run on any x64 host running a modern Linux kernel; we recommend kernel version 3.8 and later.<br>A native Linux container format that Docker calls libcontainer, as well as the popular container platform, lxc. The libcontainer format is now the default format.</li>
+<li>Linux kernel namespaces, which provide isolation for filesystems, processes, and networks.</li>
+<li>Filesystem isolation: each container is its own root filesystem. • Process isolation: each container runs in its own process environment. • Network isolation: separate virtual interfaces and IP addressing between containers.</li>
+<li>Resource isolation and grouping: resources like CPU and memory are allo- cated individually to each Docker container using the cgroups, or control groups, kernel feature.</li>
+<li>Copy-on-write: filesystems are created with copy-on-write, meaning they are layered and fast and require limited disk usage.</li>
+<li>Logging: STDOUT, STDERR and STDIN from the container are collected, logged, and available for analysis or trouble-shooting.</li>
+<li>Interactive shell: You can create a pseudo-tty and attach to STDIN to provide an interactive shell to your container.</li>
+</ul>
 
             
                 
@@ -229,7 +239,7 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/"  data-tooltip="Chapter3-Getting Started with Docker">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/20/docker/docker-chapter2/"  data-tooltip="Chapter2-Installing Docker on Ubuntu">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -237,7 +247,7 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/19/docker/docker-chapter1/" data-tooltip="Chapter1-Introduction">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/16/raspberrypi/network/" data-tooltip="配置树莓派无线网络">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -252,19 +262,19 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/&amp;title=Chapter2-Installing Docker on Ubuntu">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/&amp;title=Chapter1-Introduction">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
@@ -310,7 +320,7 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/21/docker/docker-chapter3/"  data-tooltip="Chapter3-Getting Started with Docker">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/20/docker/docker-chapter2/"  data-tooltip="Chapter2-Installing Docker on Ubuntu">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -318,7 +328,7 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/19/docker/docker-chapter1/" data-tooltip="Chapter1-Introduction">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/16/raspberrypi/network/" data-tooltip="配置树莓派无线网络">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -333,19 +343,19 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
        
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/&amp;title=Chapter2-Installing Docker on Ubuntu">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/&amp;title=Chapter1-Introduction">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
@@ -371,17 +381,17 @@ Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and late
                 <!--<div id="share-options-bar" class="share-options-bar" data-behavior="1">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/20/docker/docker-chapter2/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://gwpost.github.com/2016/04/19/docker/docker-chapter1/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>

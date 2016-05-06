@@ -22,7 +22,8 @@
 <meta property="og:description" content="We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold ima">
 <meta property="og:image" content="http://gwpost.github.com/./filesystem.png">
 <meta property="og:image" content="http://gwpost.github.com/./search.png">
-<meta property="og:updated_time" content="2016-04-22T07:42:30.692Z">
+<meta property="og:image" content="http://gwpost.github.com/./cache.png">
+<meta property="og:updated_time" content="2016-04-24T13:47:30.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter4-Working with Docker images and repositories">
 <meta name="twitter:description" content="We’ll learn a lot more about Docker images, what they are, how to manage them, how to modify them, and how to create, store, and share your own images.We’ll also examine the repositories that hold ima">
@@ -232,7 +233,7 @@
 <h3 id="The_RUN_instruction_in_exec_form">The RUN instruction in exec form</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN [ <span class="string">"apt-get"</span>, <span class="string">" install"</span>, <span class="string">"-y"</span>, <span class="string">"nginx"</span> ]</span><br></pre></td></tr></table></figure>
 <h3 id="Running_the_Dockerfile">Running the Dockerfile</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=<span class="string">"jamtur01/static_web"</span> .</span><br></pre></td></tr></table></figure>
 <p><strong>-t</strong> option to mark our resulting image with a repository and a name</p>
-<h3 id="Dockerfiles_and_the_build_cache">Dockerfiles and the build cache</h3><p>If we did not need to change anything in Steps 1 to 3, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 4.</p>
+<h3 id="Dockerfiles_and_the_build_cache">Dockerfiles and the build cache</h3><p>If we did not need to change anything in Steps 1 to 2, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 3.<br><img src="./cache.png" alt=""></p>
 <h3 id="Using_the_docker_history_command">Using the docker history command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># see each of the image layers inside  image and the Dockerfile instruction that created them.</span></span><br><span class="line">sudo docker <span class="built_in">history</span> <span class="number">22</span>d47c8cb6e5</span><br></pre></td></tr></table></figure>
 <h3 id="Viewing_the_Docker_port_mapping">Viewing the Docker port mapping</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Exposing a port with docker run</span></span><br><span class="line">sudo docker run <span class="operator">-d</span> -P --name static_web jamtur01/static_web</span><br></pre></td></tr></table></figure>
 <p>Docker also has a shortcut, -P, that allows us to expose all ports we’ve specified via EXPOSE instructions in our Dockerfile.It would also expose any additional ports we had specified with other EXPOSE instructions in the Dockerfile that built our image.</p>

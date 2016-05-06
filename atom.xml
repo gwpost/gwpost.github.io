@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Guwen's Studio]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://gwpost.github.com/"/>
-  <updated>2016-04-24T02:52:54.003Z</updated>
+  <updated>2016-05-05T07:05:37.334Z</updated>
   <id>http://gwpost.github.com/</id>
   
   <author>
@@ -15,27 +15,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[docker-chapter6]]></title>
+    <link href="http://gwpost.github.com/2016/04/28/docker/docker-chapter6/"/>
+    <id>http://gwpost.github.com/2016/04/28/docker/docker-chapter6/</id>
+    <published>2016-04-28T05:48:15.000Z</published>
+    <updated>2016-05-05T07:05:37.334Z</updated>
+    <content type="html"><![CDATA[<p>chapter6</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>chapter6</p>
+]]>
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Using Docker on RaspberryPi]]></title>
     <link href="http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/"/>
     <id>http://gwpost.github.com/2016/04/24/docker/using-docker-on-raspberrypi/</id>
     <published>2016-04-24T02:31:17.000Z</published>
-    <updated>2016-04-24T02:52:54.003Z</updated>
+    <updated>2016-04-24T04:21:08.321Z</updated>
     <content type="html"><![CDATA[<p>一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。</p>
-<h2 id="1-_开启一个Docker的守护进程">1. 开启一个Docker的守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="operator">-d</span> &amp;</span><br></pre></td></tr></table></figure>
-<h2 id="2-_开启IPv4转发">2. 开启IPv4转发</h2><p>容器要想访问外部网络，需要本地系统的转发支持。在Linux 系统中，检查转发是否打开。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.ip_forward</span><br></pre></td></tr></table></figure></p>
-<p>如果为 0，说明没有开启转发，则需要手动打开。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.ipv4.ip_forward=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>如果在启动Docker服务的时候设定<code>--ip-forward=true</code>, Docker就会自动设定系统的<code>ip_forward</code>参数为1。</p>
-<h3 id="3-下载基础镜像并开启shell终端">3.下载基础镜像并开启shell终端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i resin/rpi-raspbian /bin/bash</span><br></pre></td></tr></table></figure>
-<h3 id="4-下载docker的示例项目">4.下载docker的示例项目</h3><p>我们创建了一个可以打包在Docker容器中的示例工程<a href="http://googlecreativelab.github.io/coder/" target="_blank" rel="external">Google’s Coder Project</a>，要想运行的话，需要从前几步的shell里退出来，然后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="operator">-d</span> -p <span class="number">8081</span>:<span class="number">8081</span> resin/rpi-google-coder</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-下载基础镜像并开启shell终端">1.下载基础镜像并开启shell终端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i resin/rpi-raspbian /bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="2-下载docker的示例项目">2.下载docker的示例项目</h3><p>我们创建了一个可以打包在Docker容器中的示例工程<a href="http://googlecreativelab.github.io/coder/" target="_blank" rel="external">Google’s Coder Project</a>，要想运行的话，需要从前几步的shell里退出来，然后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="operator">-d</span> -p <span class="number">8081</span>:<span class="number">8081</span> resin/rpi-google-coder</span><br></pre></td></tr></table></figure></p>
 <p>执行完上述命令之后，你就应该可以通过在浏览器里输入https://&lt;树莓派的ip地址&gt;:8081进入Google Coder开始hacking了。别忘了要使用<strong>HTTPS</strong>安全链接哟，普通的HTTP连接会被Google Coder挂起的。</p>
-<h3 id="5-如何让Dockerfiles在树莓派上跑起来">5.如何让Dockerfiles在树莓派上跑起来</h3><p>我们已经发布了一个Raspbian基础镜像，由于大部分的Dockerfiles是基于Ubuntu的镜像，同时呢Raspbian跟Ubuntu还是很像的（这里注明一下：Ubuntu是Debian Linux的一个衍生版，而Raspbian又是一个针对树莓派的修改定制版Debian，所以大家可以自行想象是否类似了），基本上只需要将命令”FROM ubuntu”改为”FROM resin/rpi-raspbian”然后构建就好。如果这个修改无效，那应该就是你的Dockerfiles有点儿小问题，希望你能够攻克这个难关然后顺利的制作一个树莓派的镜像。</p>
-<p>由于针对X86-64位制作的镜像是无法在树莓派上顺利工作的（CPU架构和指令集不一样，这里不再赘述），反之亦然，我们会询问你是否要为树莓派创建一个新的镜像，你可以通过使用 rpi-*作为前缀，方便其他人能够清楚的看到。同时也希望Docker团队能够为不同的系统提供更多的原生支持，但现在的话，这个也已经够用了。</p>
+<h3 id="3-如何让Dockerfiles在树莓派上跑起来">3.如何让Dockerfiles在树莓派上跑起来</h3><p>我们已经发布了一个Raspbian基础镜像，由于大部分的Dockerfiles是基于Ubuntu的镜像，同时呢Raspbian跟Ubuntu还是很像的（这里注明一下：Ubuntu是Debian Linux的一个衍生版，而Raspbian又是一个针对树莓派的修改定制版Debian，所以大家可以自行想象是否类似了），基本上只需要将命令”<strong>FROM ubuntu</strong>“改为”<strong>FROM resin/rpi-raspbian</strong>“然后构建就好。如果这个修改无效，那应该就是你的Dockerfiles有点儿小问题，希望你能够攻克这个难关然后顺利的制作一个树莓派的镜像。</p>
+<p>由于针对X86-64位制作的镜像是无法在树莓派上顺利工作的（CPU架构和指令集不一样，这里不再赘述），反之亦然，我们会询问你是否要为树莓派创建一个新的镜像，你可以通过使用 <strong> rpi-* </strong> 作为前缀，方便其他人能够清楚的看到。同时也希望Docker团队能够为不同的系统提供更多的原生支持，但现在的话，这个也已经够用了。</p>
 <p>原文链接：<a href="http://blog.csdn.net/jeepxiaozi/article/details/40478309" target="_blank" rel="external">http://blog.csdn.net/jeepxiaozi/article/details/40478309</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>一旦你完成了Docker的安装，你应该很想立刻就继续做点儿啥，而不是坐享其成。进一步的工作包括安装一个基本的镜像，对于这一步，可以使用resin/rpi-raspbian，从这里你可以直接在你的树莓派开始使用Docker了。</p>
-<h2 id="1-_开启一个Docke]]>
+<h3 id="1-下载基础镜像并开启s]]>
     </summary>
     
       <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
@@ -72,7 +84,7 @@
     <link href="http://gwpost.github.com/2016/04/22/docker/docker-chapter4/"/>
     <id>http://gwpost.github.com/2016/04/22/docker/docker-chapter4/</id>
     <published>2016-04-22T12:04:56.000Z</published>
-    <updated>2016-04-22T07:42:30.692Z</updated>
+    <updated>2016-04-24T13:47:30.459Z</updated>
     <content type="html"><![CDATA[<p>We’ll learn a lot more about Docker images, <strong>what they are, how to manage them, how to modify them, and how to create, store, and share your own images</strong>.We’ll also examine the <strong>repositories</strong> that hold images and the <strong>registries</strong> that store repositories.</p>
 <h2 id="Images">Images</h2><ol>
 <li>Docker images is the building blocks from which we launch containers.</li>
@@ -116,7 +128,7 @@
 <h3 id="The_RUN_instruction_in_exec_form">The RUN instruction in exec form</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN [ <span class="string">"apt-get"</span>, <span class="string">" install"</span>, <span class="string">"-y"</span>, <span class="string">"nginx"</span> ]</span><br></pre></td></tr></table></figure>
 <h3 id="Running_the_Dockerfile">Running the Dockerfile</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=<span class="string">"jamtur01/static_web"</span> .</span><br></pre></td></tr></table></figure>
 <p><strong>-t</strong> option to mark our resulting image with a repository and a name</p>
-<h3 id="Dockerfiles_and_the_build_cache">Dockerfiles and the build cache</h3><p>If we did not need to change anything in Steps 1 to 3, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 4.</p>
+<h3 id="Dockerfiles_and_the_build_cache">Dockerfiles and the build cache</h3><p>If we did not need to change anything in Steps 1 to 2, then Docker would use the previously built images as a cache and a starting point. Essentially, it’d start the build process straight from Step 3.<br><img src="./cache.png" alt=""></p>
 <h3 id="Using_the_docker_history_command">Using the docker history command</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># see each of the image layers inside  image and the Dockerfile instruction that created them.</span></span><br><span class="line">sudo docker <span class="built_in">history</span> <span class="number">22</span>d47c8cb6e5</span><br></pre></td></tr></table></figure>
 <h3 id="Viewing_the_Docker_port_mapping">Viewing the Docker port mapping</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Exposing a port with docker run</span></span><br><span class="line">sudo docker run <span class="operator">-d</span> -P --name static_web jamtur01/static_web</span><br></pre></td></tr></table></figure>
 <p>Docker also has a shortcut, -P, that allows us to expose all ports we’ve specified via EXPOSE instructions in our Dockerfile.It would also expose any additional ports we had specified with other EXPOSE instructions in the Dockerfile that built our image.</p>
@@ -198,22 +210,92 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Chapter2-Installing Docker]]></title>
+    <title><![CDATA[Chapter2-Installing Docker on Ubuntu]]></title>
     <link href="http://gwpost.github.com/2016/04/20/docker/docker-chapter2/"/>
     <id>http://gwpost.github.com/2016/04/20/docker/docker-chapter2/</id>
     <published>2016-04-20T07:45:35.000Z</published>
-    <updated>2016-04-23T13:32:18.385Z</updated>
-    <content type="html"><![CDATA[<h2 id="Prerequisites">Prerequisites</h2><p>Docker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are also acceptable.</p>
-<p>To check your current kernel version, open a terminal and use <code>uname -r</code> to display your kernel version:</p>
-<h2 id="Installing_docker">Installing docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install docker</span><br></pre></td></tr></table></figure>
-<h3 id="Adding_current_user_to_docker_group">Adding current user to docker group</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd <span class="operator">-a</span> &lt;your_login&gt; docker</span><br></pre></td></tr></table></figure>
+    <updated>2016-05-05T11:04:07.861Z</updated>
+    <content type="html"><![CDATA[<h2 id="Requirements">Requirements</h2><ul>
+<li>Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently supported.</li>
+<li>Be running a Linux 3.8 or later kernel. Some earlier kernels from 2.6.x and later will run Docker successfully. Your results will greatly vary, though, and if you need support you will often be asked to run on a more recent kernel.</li>
+<li>The kernel must support an appropriate storage driver. For example,<br>– Device Mapper<br>– AUFS<br>– vfs.<br>– btrfs<br>– The default storage driver is usually Device Mapper.</li>
+<li>cgroups and namespaces kernel features must be supported and enabled.</li>
+</ul>
+<h2 id="Checking_for_prerequisites">Checking for prerequisites</h2><h3 id="1-_Checking_for_Kernel">1. Checking for Kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname <span class="operator">-a</span></span><br></pre></td></tr></table></figure>
+<p><img src="./uname.png" alt=""></p>
+<p>If, however, we’re using an earlier release of Ubuntu 12.04 Precise, we may have a 3.2 kernel. We can easily upgrade our Ubuntu 12.04 to the later kernel; for example, at the time of writing, the 3.8 kernel was available to install via <code>apt-get</code>.</p>
+<h3 id="2-_Checking_for_Device_Mapper">2. Checking for Device Mapper</h3><p>We’re going to make use of the Device Mapper storage driver.Device Mapper should be installed on any Ubuntu 12.04 or later hosts, but we can confirm it is installed like so:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l <span class="regexp">/sys/</span><span class="keyword">class</span><span class="regexp">/misc/</span>device-mapper</span><br></pre></td></tr></table></figure></p>
+<p>We could also check in /proc/devices for a device-mapper entry.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grep device-mapper /proc/devices</span><br></pre></td></tr></table></figure></p>
+<p>If neither is present, we can also try to load the dm_mod module.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe dm_mod</span><br></pre></td></tr></table></figure></p>
+<h2 id="Installing_docker">Installing docker</h2><p>First, we add the Docker APT repository. You may be prompted to confirm that you wish to add the repository and have the repositories GPG automatically added to your host.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">"echo deb https://get.docker.io/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list"</span></span><br></pre></td></tr></table></figure></p>
+<p>Adding the Docker repository GPG key<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="operator">-s</span> https://get.docker.io/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure></p>
+<p>Now, we update our APT sources.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
+<p>We can now install the Docker package itself.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lxc-docker</span><br></pre></td></tr></table></figure></p>
+<h2 id="Docker_installation_script">Docker installation script</h2><p>There is also an alternative method available to install Docker on an appropriate host using a remote installation script.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.docker.io/ | sudo sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="The_Docker_daemon">The Docker daemon</h2><p>After we’ve installed Docker, we need to confirm that the Docker daemon is run- ning. Docker runs as a root-privileged daemon process to allow it to handle op- erations that can’t be executed by normal users (e.g., mounting filesystems). The docker binary runs as a client of this daemon and also requires root privileges to run.</p>
+<p>The Docker daemon should be started by default when the Docker package is installed. By default, the daemon listens on a Unix socket at /var/run/docker.↩ sock for incoming Docker requests. If a group named docker exists on our system, Docker will apply ownership of the socket to that group. Hence, any user that belongs to the docker group can run Docker without needing to use the sudo command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd <span class="operator">-a</span> &lt;your_login&gt; docker</span><br></pre></td></tr></table></figure></p>
 <p>Now, you can execute docker without root authority.</p>
+<h2 id="Checking_that_the_Docker_daemon_is_running">Checking that the Docker daemon is running</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Checking the status of the Docker daemon</span></span><br><span class="line">sudo status docker docker</span><br><span class="line"><span class="comment">## Starting Docker</span></span><br><span class="line">sudo start docker</span><br><span class="line"><span class="comment">## Stooping Docker</span></span><br><span class="line">sudo stop docker</span><br></pre></td></tr></table></figure>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="Prerequisites">Prerequisites</h2><p>Docker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kern]]>
+    <![CDATA[<h2 id="Requirements">Requirements</h2><ul>
+<li>Be running a 64-bit architecture (currently x86_64 and amd64 only). 32-bit is NOT currently ]]>
     </summary>
     
-      <category term="dokcer" scheme="http://gwpost.github.com/categories/dokcer/"/>
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Chapter1-Introduction]]></title>
+    <link href="http://gwpost.github.com/2016/04/19/docker/docker-chapter1/"/>
+    <id>http://gwpost.github.com/2016/04/19/docker/docker-chapter1/</id>
+    <published>2016-04-19T07:45:35.000Z</published>
+    <updated>2016-05-05T08:54:40.558Z</updated>
+    <content type="html"><![CDATA[<h2 id="Introducing_Docker">Introducing Docker</h2><p>Docker is an open-source engine that automates the deployment of applications into containers. It was written by the team at Docker, Inc (formerly <strong>dotCloud Inc</strong>, an early player in the Platform-as-a-Service (PAAS) market), and released by them under the Apache 2.0 license. Docker adds an application deployment engine on top of a virtualized container execution environment. It is designed to provide a lightweight and fast environment in which to run your code as well as <strong>an efficient workflow to get that code from your laptop to your test environment and then into production</strong>. Docker is incredibly simple. Indeed, you can get started with Docker on a minimal host running nothing but a <strong>compatible Linux kernel and a Docker binary</strong>.</p>
+<p>Unlike hypervisor virtualization, where one or more independent machines run virtually on <strong>physical hardware</strong> via an intermediation layer, containers instead run user space on top of an operating system’s kernel. As a result, container virtualization is often called operating system-level virtualization.</p>
+<p>It can generally only run the <strong>same or a similar</strong> guest operating system as the underlying host. For example, you can run Red Hat Enterprise Linux on an Ubuntu server, but you can’t run Microsoft Windows on top of an Ubuntu server</p>
+<h2 id="Characters_of_Dokcer">Characters of Dokcer</h2><h3 id="1-_An_easy_and_lightweight_way_to_model_reality">1. An easy and lightweight way to model reality</h3><p>You can Dockerize your application in minutes. Docker relies on a copy-on-write model so that making changes to your application is also incredibly fast: only what you want to change gets changed.</p>
+<p>You can then create containers running your applications. Most Docker containers take less than a second to launch.</p>
+<h3 id="2-_A_logical_segregation_of_duties">2. A logical segregation of duties</h3><p>With Docker, Developers care about their applications running inside containers, and Operations cares about managing the containers.</p>
+<h3 id="3-_Fast,_efficient_development_life_cycle">3. Fast, efficient development life cycle</h3><p>Docker aims to reduce the cycle time between code being written and code being tested, deployed, and used.</p>
+<h3 id="4-_Encourages_service_orientated_architecture">4. Encourages service orientated architecture</h3><p>Docker recommends that each container run a single application or process. This makes it very easy to distribute, scale, debug and introspect your applications.</p>
+<h2 id="Docker_components">Docker components</h2><h3 id="1-_Docker_client_and_server">1. Docker client and server</h3><p>Docker is a client-server application. The Docker client talks to the Docker server or daemon, which, in turn, does all the work. Docker ships with a command line client binary, docker, as well as a full RESTful API. You can run the Docker daemon and client on the same host or connect your local Docker client to a remote daemon running on another host.</p>
+<h3 id="2-_Docker_images">2. Docker images</h3><p>You can consider images to be the “source code” for your containers.</p>
+<h3 id="3-_Registries">3. Registries</h3><p>There are two types of registries: <strong>public and private</strong>.</p>
+<h3 id="4-_Containers">4. Containers</h3><p>containers are launched from images and can contain one or more running processes. You can think about images as the building or packing aspect of Docker and the containers as the running or execution aspect of Docker.</p>
+<p>A Docker container is:</p>
+<ul>
+<li>An image format.</li>
+<li>A set of standard operations.</li>
+<li>An execution environment.</li>
+</ul>
+<p>Docker borrows the concept of the standard shipping container, used to transport goods globally, as a model for its containers. But instead of shipping goods, Docker containers ship software.</p>
+<h2 id="What_can_you_use_Docker_for?">What can you use Docker for?</h2><ul>
+<li>Helping make your local development and build workflow faster, more ef- ficient, and more lightweight. Local developers can build, run, and share Docker containers. Containers can be built in development and promoted to testing environments and, in turn, to production.</li>
+<li>Running stand-alone services and applications consistently across multiple environments, a concept especially useful in service-oriented architectures and deployments that rely heavily on micro-services.</li>
+<li>Using Docker to create isolated instances to run tests like, for example, those launched by a Continuous Integration (CI) suite like Jenkins CI.</li>
+<li>Building and testing complex applications and architectures on a local host prior to deployment into a production environment.</li>
+<li>Building a multi-user Platform-as-a-Service (PAAS) infrastructure.</li>
+<li>Providing lightweight stand-alone sandbox environments for developing, testing, and teaching technologies, such as the Unix shell or a programming language.</li>
+<li>Software as a Service applications; for example, Memcached as a service.</li>
+<li>Highly performant, hyperscale deployments of hosts.</li>
+</ul>
+<h2 id="Docker’s_technical_components">Docker’s technical components</h2><ul>
+<li>Docker can be run on any x64 host running a modern Linux kernel; we recommend kernel version 3.8 and later.<br>A native Linux container format that Docker calls libcontainer, as well as the popular container platform, lxc. The libcontainer format is now the default format.</li>
+<li>Linux kernel namespaces, which provide isolation for filesystems, processes, and networks.</li>
+<li>Filesystem isolation: each container is its own root filesystem. • Process isolation: each container runs in its own process environment. • Network isolation: separate virtual interfaces and IP addressing between containers.</li>
+<li>Resource isolation and grouping: resources like CPU and memory are allo- cated individually to each Docker container using the cgroups, or control groups, kernel feature.</li>
+<li>Copy-on-write: filesystems are created with copy-on-write, meaning they are layered and fast and require limited disk usage.</li>
+<li>Logging: STDOUT, STDERR and STDIN from the container are collected, logged, and available for analysis or trouble-shooting.</li>
+<li>Interactive shell: You can create a pseudo-tty and attach to STDIN to provide an interactive shell to your container.</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Introducing_Docker">Introducing Docker</h2><p>Docker is an open-source engine that automates the deployment of applications into con]]>
+    </summary>
+    
+      <category term="docker" scheme="http://gwpost.github.com/categories/docker/"/>
     
   </entry>
   
